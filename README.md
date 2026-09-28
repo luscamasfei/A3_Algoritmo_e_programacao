@@ -3,42 +3,10 @@
 
 ## 🧑🏻‍🎓 **Alunos:**
 
-<table>
-  <tr>
-    <td align="center">
-    <a href="https://github.com/luscamasfei">
-      <img src="https://github.com/luscamasfei.png" width="100px;" alt="Lucas Maffei"/><br>
-      <sub><b>luscamasfei</b></sub>
-    </a><br>
-      <sub>RA: 10726210757</sub>
-    </td>
-    <td align="center">
-    <a href="https://github.com/Patricialima99">
-      <img src="https://github.com/Patricialima99.png" width="100px;" alt="Patricia Lima da Silva"/><br>
-      <sub><b>Patricialima99</b></sub>
-    </a><br>
-      <sub>RA: 10726210607</sub>
-    </td>
-    <td align="center">
-    <a href="https://github.com/adamschneider34">
-      <img src="https://github.com/adamschneider34.png" width="100px;" alt="Adam Schneider de Andrade"/><br>
-      <sub><b>adamschneider34</b></sub>
-    </a><br>
-      <sub>RA: 15619194973</sub>
-    </td>
-    <td align="center">
-    <a href="https://github.com/maria-eduarda-cdv">
-      <img src="https://github.com/maria-eduarda-cdv.png" width="100px;" alt="Maria Eduarda Carriço de Vargas Ávila de Oliveira"/><br>
-      <sub><b>maria-eduarda-cdv</b></sub>
-    </a><br>
-      <sub>RA: 1072629055</sub>
-    </td>
-    <td align="center">
-    <a href="https://github.com/SupDan01">
-      <img src="https://github.com/SupDan01.png" width="100px;" alt="Luan Schultz Ceretta"/><br>
-      <sub><b>SupDan01</b></sub>
-    </a><br>
-      <sub>RA: 1072629711</sub>
-    </td>
-  </tr>
-</table>
+| Nome Completo | RA | GitHub |
+| :--- | :--- | :--- |
+| **Lucas Maffei** | 10726210757 | [luscamasfei](https://github.com/luscamasfei) |
+| **Patricia Lima da Silva** | 10726210607 | [Patricialima99](https://github.com/Patricialima99) |
+| **Adam Schneider de Andrade** | 15619194973 | [adamschneider34](https://github.com/adamschneider34) |
+| **Maria Eduarda Carriço de Vargas Ávila de Oliveira** | 1072629055 | [maria-eduarda-cdv](https://github.com/maria-eduarda-cdv) |
+| **Luan Schultz Ceretta** | 1072629711 | [Sunflower964](https://github.com/SupDan01) |
