@@ -5,6 +5,7 @@ public class Main {
         System.out.println("Patricia Lima da Silva");
         System.out.println("Adam Schneider de Andrade");
         System.out.println("Luan Schultz Ceretta");
+        System.out.println("Maria Eduarda Carriço de Vargas Ávila de Oliveira");
     }
     
 }
