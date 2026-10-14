@@ -26,17 +26,41 @@ public class Conta {
     public String getDescricao() {
         return descricao;
     }
+
     public String getBeneficiario() {
         return beneficiario;
     }
+
     public double getValor() {
         return valor;
     }
+
     public double getSaldo() {
         return saldo;
     }
+
     public LocalDate getVencimento() {
         return vencimento;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public void setBeneficiario(String beneficiario) {
+        this.beneficiario = beneficiario;
+    }
+
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+
+    public void setVencimento(LocalDate vencimento) {
+        this.vencimento = vencimento;
     }
 }
 
