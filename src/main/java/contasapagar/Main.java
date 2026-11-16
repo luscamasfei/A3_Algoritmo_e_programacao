@@ -26,6 +26,15 @@ public class Main {
     static int totalContas = 0;
     static BigDecimal[] contaSaldo = new BigDecimal[1000];
 
+    static int buscarConta(int documento) {
+        for (int i = 0; i < totalContas; i++) {
+            if (contaNum[i] == documento) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     public static void Menu() {
         int opcao = 0;
         do {
