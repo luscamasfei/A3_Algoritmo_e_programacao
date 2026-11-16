@@ -23,6 +23,7 @@ public class Main {
     static String[] contaBenef = new String[1000];
     static BigDecimal[] contaDebit = new BigDecimal[1000];
     static String[] contaData = new String[1000];
+    static int totalContas = 0;
 
     public static void Menu() {
         int opcao = 0;
