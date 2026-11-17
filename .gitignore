@@ -30,3 +30,4 @@ replay_pid*
 .vscode/
 nbproject/
 nbactions.xml
+.idea/

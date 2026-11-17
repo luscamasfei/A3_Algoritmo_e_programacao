@@ -23,6 +23,18 @@ public class Main {
     static String[] contaBenef = new String[1000];
     static BigDecimal[] contaDebit = new BigDecimal[1000];
     static String[] contaData = new String[1000];
+    static int totalContas = 0; // Quantas contas existem
+    static BigDecimal[] contaSaldo = new BigDecimal[1000]; // Quanto falta para pagar a conta
+
+    // Devole o valor da posição da conta ou -1 se não encontrar
+    static int buscarConta(int documento) {
+        for (int i = 0; i < totalContas; i++) {
+            if (contaNum[i] == documento) {
+                return i;
+            }
+        }
+        return -1;
+    }
 
     public static void Menu() {
         int opcao = 0;
