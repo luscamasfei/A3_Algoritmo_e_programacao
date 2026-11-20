@@ -30,6 +30,24 @@ public class Main {
     static int totalContas = 0; // Quantas contas existem
     static BigDecimal[] contaSaldo = new BigDecimal[1000]; // Quanto falta para pagar a conta
 
+    // ADAM: Para facilitar testes, fiz 5 documentos tipo placeholder. Para usar, é
+    // só comentar as linhas acima e retirar o comentário destas.
+    /*
+     * static int[] contaNum = { 1, 2, 3, 4, 5 };
+     * static String[] contaDesc = { "PLACEHOLDER1", "PLACEHOLDER2", "PLACEHOLDER3",
+     * "PLACEHOLDER4", "PLACEHOLDER5" };
+     * static String[] contaBenef = { "Adam Schneider", "Sadam Aschneider",
+     * "Damdam Neineider", "Adam Schneider", "Sadam Aschneider" };
+     * static BigDecimal[] contaDebit = { new BigDecimal("1000.00"), new
+     * BigDecimal("2000.00"), new BigDecimal("3000.00"), new BigDecimal("4000.00"),
+     * new BigDecimal("5000.00") };
+     * static LocalDate[] contaData = { LocalDate.of(2021, 1, 1), LocalDate.of(2021,
+     * 1, 1), LocalDate.of(2021, 1, 1), LocalDate.of(2021, 1, 1), LocalDate.of(2021,
+     * 1, 1) };
+     * static int totalContas = 5;
+     * static BigDecimal[] contaSaldo = new BigDecimal[1000];
+     */
+
     // Devole o valor da posição da conta ou -1 se não encontrar
     static int buscarConta(int documento) {
         for (int i = 0; i < totalContas; i++) {
