@@ -87,47 +87,43 @@ public class Main {
     }
 
     static void baixarConta() {
-        int i, flag;
+
         System.out.println("==================\nBAIXANDO CONTA... \n");
 
         System.out.println("MOVIMENTAÇÃO - BAIXA DE CONTA\n");
         System.out.println("Digite o número do documento.\n");
         System.out.println("==================\n");
-        int baixa_numDoc = sc.nextInt();
+        int documento = sc.nextInt();
+        if (buscarConta(documento) != 1) {
+            int i = buscarConta(documento);
+            System.out.println("Documento Encontrado!");
+            System.out.println("Número: " + contaNum[i]);
+            System.out.println("Descrição: " + contaDesc[i]);
+            System.out.println("Beneficiário: " + contaBenef[i]);
+            System.out.println("Validade: " + contaData[i]);
+            System.out.println("==================\n");
+            System.out.println("VALOR ATUAL: " + contaDebit[i]);
+            System.out.println("Digite o valor a ser pago.");
 
-        flag = 0;
-        for (i = 0; i < contaNum.length; i++) {
-            if (contaNum[i] == baixa_numDoc) {
+            BigDecimal baixa_valorPago = sc.nextBigDecimal();
+            if ((baixa_valorPago.compareTo(contaDebit[i])) < 0) {
+                BigDecimal baixa_valorFinal = contaDebit[i].subtract(baixa_valorPago);
+                contaDebit[i] = baixa_valorFinal;
+                System.out.println("\n Conta baixada com sucesso.");
 
-                System.out.println("Documento Encontrado!");
-                System.out.println("Número: " + contaNum[i]);
-                System.out.println("Descrição: " + contaDesc[i]);
-                System.out.println("Beneficiário: " + contaBenef[i]);
-                System.out.println("Validade: " + contaData[i]);
-                System.out.println("==================\n");
-                System.out.println("VALOR ATUAL: " + contaDebit[i]);
-                System.out.println("Digite o valor a ser pago.");
+            } else if ((baixa_valorPago.compareTo(contaDebit[i])) > 0) {
+                System.out.println(
+                        "\n O valor inserido foi maior do que o débito da conta. Favor inserir um valor menor ou igual ao débito.");
 
-                BigDecimal baixa_valorPago = sc.nextBigDecimal();
-                if ((baixa_valorPago.compareTo(contaDebit[i])) < 0) {
-                    BigDecimal baixa_valorFinal = contaDebit[i].subtract(baixa_valorPago);
-                    contaDebit[i] = baixa_valorFinal;
-                    System.out.println("\n Conta baixada com sucesso.");
-
-                } else if ((baixa_valorPago.compareTo(contaDebit[i])) > 0) {
-                    System.out.println(
-                            "\n O valor inserido foi maior do que o débito da conta. Favor inserir um valor menor ou igual ao débito.");
-
-                } else if ((baixa_valorPago.compareTo(contaDebit[i])) == 0) {
-                    BigDecimal baixa_valorFinal = contaDebit[i].subtract(baixa_valorPago);
-                    contaDebit[i] = baixa_valorFinal;
-                    System.out.println("\n Conta quitada.");
-                }
-
-                flag = 1;
+            } else if ((baixa_valorPago.compareTo(contaDebit[i])) == 0) {
+                BigDecimal baixa_valorFinal = contaDebit[i].subtract(baixa_valorPago);
+                contaDebit[i] = baixa_valorFinal;
+                System.out.println("\n Conta quitada.");
             }
+
         }
-        if (flag == 0) {
+
+        else {
             System.out.println("o valor procurado não foi encontrado, tente novamente.\n");
         }
 
