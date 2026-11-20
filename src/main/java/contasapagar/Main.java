@@ -2,11 +2,15 @@ package contasapagar;
 
 import java.util.Scanner;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 // ADAM: Por favor manter em mente que usei BigDecimal para armazenar a variavel de débito de cada documento quando forem escrever o código de suas partes :)
+// ADAM: LocalDate usa o formato ANO-MÊS-DIA.
 
 public class Main {
 
+    static DateTimeFormatter sdf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     static Scanner sc = new Scanner(System.in);
 
     /*
@@ -14,15 +18,15 @@ public class Main {
      * • No. do Documento (int)
      * • Descrição (String)
      * • Beneficiário (String)
-     * • Valor do Débito (double)
-     * • Data de Vencimento (String) XX-XX-XXXX
+     * • Valor do Débito (BigDecimal)
+     * • Data de Vencimento (LocalDate) XXXX, XX, XX
      */
 
     static int[] contaNum = new int[1000];
     static String[] contaDesc = new String[1000];
     static String[] contaBenef = new String[1000];
     static BigDecimal[] contaDebit = new BigDecimal[1000];
-    static String[] contaData = new String[1000];
+    static LocalDate[] contaData = new LocalDate[1000];
     static int totalContas = 0; // Quantas contas existem
     static BigDecimal[] contaSaldo = new BigDecimal[1000]; // Quanto falta para pagar a conta
 
@@ -96,11 +100,12 @@ public class Main {
         int documento = sc.nextInt();
         if (buscarConta(documento) != 1) {
             int i = buscarConta(documento);
+            String baixarcontaData = contaData[i].format(sdf);
             System.out.println("Documento Encontrado!");
             System.out.println("Número: " + contaNum[i]);
             System.out.println("Descrição: " + contaDesc[i]);
             System.out.println("Beneficiário: " + contaBenef[i]);
-            System.out.println("Validade: " + contaData[i]);
+            System.out.println("Validade: " + baixarcontaData);
             System.out.println("==================\n");
             System.out.println("VALOR ATUAL: " + contaDebit[i]);
             System.out.println("Digite o valor a ser pago.");
@@ -142,5 +147,4 @@ public class Main {
         Menu();
         sc.close();
     }
-
 }
