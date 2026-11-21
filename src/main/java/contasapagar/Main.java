@@ -28,10 +28,12 @@ public class Main {
     static BigDecimal[] contaDebit = new BigDecimal[1000];
     static LocalDate[] contaData = new LocalDate[1000];
     static int totalContas = 0; // Quantas contas existem
+    static boolean[] contaQuitada = new boolean[1000];
     static BigDecimal[] contaSaldo = new BigDecimal[1000]; // Quanto falta para pagar a conta
 
     // ADAM: Para facilitar testes, fiz 5 documentos tipo placeholder. Para usar, é
     // só comentar as linhas acima e retirar o comentário destas.
+
     /*
      * static int[] contaNum = { 1, 2, 3, 4, 5 };
      * static String[] contaDesc = { "PLACEHOLDER1", "PLACEHOLDER2", "PLACEHOLDER3",
@@ -39,16 +41,22 @@ public class Main {
      * static String[] contaBenef = { "Adam Schneider", "Sadam Aschneider",
      * "Damdam Neineider", "Adam Schneider", "Sadam Aschneider" };
      * static BigDecimal[] contaDebit = { new BigDecimal("1000.00"), new
-     * BigDecimal("2000.00"), new BigDecimal("3000.00"), new BigDecimal("4000.00"),
+     * BigDecimal("2000.00"), new BigDecimal("3000.00"),
+     * new BigDecimal("4000.00"),
      * new BigDecimal("5000.00") };
      * static LocalDate[] contaData = { LocalDate.of(2021, 1, 1), LocalDate.of(2021,
-     * 1, 1), LocalDate.of(2021, 1, 1), LocalDate.of(2021, 1, 1), LocalDate.of(2021,
+     * 1, 1), LocalDate.of(2021, 1, 1), LocalDate.of(2021, 1, 1),
+     * LocalDate.of(2021,
      * 1, 1) };
      * static int totalContas = 5;
+     * static boolean[] contaQuitada = { false, false, false, false, false };
      * static BigDecimal[] contaSaldo = new BigDecimal[1000];
      */
 
-    // Devole o valor da posição da conta ou -1 se não encontrar
+    /**
+     * @param documento Número do documento (contaNum)
+     * @return Devole o valor da posição da conta, ou -1 se não encontrar
+     */
     static int buscarConta(int documento) {
         for (int i = 0; i < totalContas; i++) {
             if (contaNum[i] == documento) {
@@ -115,43 +123,54 @@ public class Main {
         System.out.println("MOVIMENTAÇÃO - BAIXA DE CONTA\n");
         System.out.println("Digite o número do documento.\n");
         System.out.println("==================\n");
+
+        // ADAM: Lembrar de ver se é preciso refatorar essa parte.
         int documento = sc.nextInt();
-        if (buscarConta(documento) != 1) {
+        if (buscarConta(documento) != -1) {
+
             int i = buscarConta(documento);
             String baixarcontaData = contaData[i].format(sdf);
+
             System.out.println("Documento Encontrado!");
             System.out.println("Número: " + contaNum[i]);
             System.out.println("Descrição: " + contaDesc[i]);
             System.out.println("Beneficiário: " + contaBenef[i]);
             System.out.println("Validade: " + baixarcontaData);
-            System.out.println("==================\n");
-            System.out.println("VALOR ATUAL: " + contaDebit[i]);
-            System.out.println("Digite o valor a ser pago.");
 
-            BigDecimal baixa_valorPago = sc.nextBigDecimal();
-            if ((baixa_valorPago.compareTo(contaDebit[i])) < 0) {
-                BigDecimal baixa_valorFinal = contaDebit[i].subtract(baixa_valorPago);
-                contaDebit[i] = baixa_valorFinal;
-                System.out.println("\n Conta baixada com sucesso.");
+            if (contaQuitada[i] == true) {
+                System.out.println("Status: FECHADA/QUITADA");
+                System.out.println("==================");
+                System.out.println("VALOR ATUAL: " + contaDebit[i]);
+                System.out.println("Esta conta ja foi fechada!");
+            } else {
+                System.out.println("Status: ABERTA");
+                System.out.println("==================");
+                System.out.println("VALOR ATUAL: " + contaDebit[i]);
+                System.out.println("\nDigite o valor a ser baixado.");
 
-            } else if ((baixa_valorPago.compareTo(contaDebit[i])) > 0) {
-                System.out.println(
-                        "\n O valor inserido foi maior do que o débito da conta. Favor inserir um valor menor ou igual ao débito.");
+                BigDecimal baixa_valorPago = sc.nextBigDecimal();
 
-            } else if ((baixa_valorPago.compareTo(contaDebit[i])) == 0) {
-                BigDecimal baixa_valorFinal = contaDebit[i].subtract(baixa_valorPago);
-                contaDebit[i] = baixa_valorFinal;
-                System.out.println("\n Conta quitada.");
+                if ((baixa_valorPago.compareTo(contaDebit[i])) < 0) {
+                    BigDecimal baixa_valorFinal = contaDebit[i].subtract(baixa_valorPago);
+                    contaDebit[i] = baixa_valorFinal;
+                    System.out.println("\nConta baixada com sucesso.");
+
+                } else if ((baixa_valorPago.compareTo(contaDebit[i])) > 0) {
+                    System.out.println(
+                            "\nO valor inserido foi maior do que o débito da conta. Favor inserir um valor menor ou igual ao débito.");
+
+                } else if ((baixa_valorPago.compareTo(contaDebit[i])) == 0) {
+                    contaDebit[i] = contaDebit[i].subtract(baixa_valorPago);
+                    System.out.println("\nA conta de ID " + contaNum[i] + " foi quitada.\n");
+                    contaQuitada[i] = true;
+
+                }
             }
 
-        }
-
-        else {
+        } else {
             System.out.println("o valor procurado não foi encontrado, tente novamente.\n");
         }
 
-        System.out.println("==================\n");
-        // Baixar conta. Tela 1.2
         System.out.println("==================\n");
     }
 
