@@ -83,6 +83,7 @@ public class Main {
             System.out.println("2 - BAIXA DE CONTAS");
             System.out.println("3 - RELATORIOS");
             System.out.println("0 - FINALIZAR");
+            System.out.println("OPÇÃO: ");
 
             if (sc.hasNextInt()) {
                 opcao = sc.nextInt();
@@ -112,7 +113,44 @@ public class Main {
 
     static void cadastrarConta() {
         System.out.println("==================\nCADASTRANDO CONTA... \n");
-        // Cadastrar conta. Tela 1.1
+        // Lucas: Menu de cadastro já com failsafe
+        int opcaoCadastro = -1;
+        do {
+            System.out.println("CADASTRO DE CONTAS");
+            System.out.println("1 - INCLUSÃO");
+            System.out.println("2 - ALTERAÇÃO");
+            System.out.println("3 - CONSULTA");
+            System.out.println("4 - EXCLUSÃO");
+            System.out.println("0 - RETORNAR");
+            System.out.print("OPÇÃO: ");
+
+            if (sc.hasNextInt()) {
+                opcaoCadastro = sc.nextInt();
+                sc.nextLine();
+
+                switch (opcaoCadastro) {
+                    case 1:
+                        System.out.println("=== INCLUSÃO ===");
+                        break;
+                    case 2:
+                        System.out.println("=== ALTERAÇÃO ===");
+                        break;
+                    case 3:
+                        System.out.println("=== CONSULTA === ");
+                        break;
+                    case 4:
+                        System.out.println("=== EXCLUSÃO ===");
+                        break;
+                    case 0:
+                        break;
+                    default:
+                        System.out.println("Opção inválida.");
+                }
+            } else {
+                System.out.println("Você precisa digitar um númmero!");
+                sc.nextLine();
+            }
+        } while (opcaoCadastro != 0);
         System.out.println("==================\n");
     }
 
