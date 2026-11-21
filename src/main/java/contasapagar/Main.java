@@ -124,8 +124,14 @@ public class Main {
         System.out.println("Digite o número do documento.\n");
         System.out.println("==================\n");
 
-        // ADAM: Lembrar de ver se é preciso refatorar essa parte.
+        // Recebe número do documento, com failsafe.
+        while (!sc.hasNextInt()) {
+            System.out.println("Número de documento inválido.");
+            sc.next();
+            System.out.println("Digite o número do documento.\n");
+        }
         int documento = sc.nextInt();
+
         if (buscarConta(documento) != -1) {
 
             int i = buscarConta(documento);
