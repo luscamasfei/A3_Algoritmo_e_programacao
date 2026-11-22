@@ -1,5 +1,6 @@
 package contasapagar;
 
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -136,7 +137,7 @@ public class Main {
                         alterarConta();
                         break;
                     case 3:
-                        System.out.println("=== CONSULTA === ");
+                        consultarConta();
                         break;
                     case 4:
                         System.out.println("=== EXCLUSÃO ===");
@@ -294,6 +295,37 @@ public class Main {
             System.out.println("Conta alterada com sucesso!");
         } else {
             System.out.println("Alteração cancelada!");
+        }
+    }
+
+    static void consultarConta() {
+        System.out.println("=== CONSULTA DE CONTA ===");
+
+        // Lucas: Inserir documento
+        System.out.print("DOCUMENTO: ");
+        int documento = sc.nextInt();
+        sc.nextLine();
+
+        // Lucas: Busca o documento e retorna -1 se não encontrar
+        int i = buscarConta(documento);
+        if (i == -1) {
+            System.out.println("Conta não encontrada");
+            return;
+        }
+
+
+        System.out.println("DOCUMENTO: " + contaNum[i]);
+        System.out.println("DESCRIÇÃO: " + contaDesc[i]);
+        System.out.println("BENEFICIÁRIO: " + contaBenef[i]);
+        System.out.println("VALOR ORIGINAL: " + contaSaldo[i]);
+        System.out.println("FALTA PAGAR: " + contaDebit[i]);
+        System.out.println("VENCIMENTO: " + contaData[i].format(sdf));
+
+        // Lucas: Mostra se a conta já foi paga usando o vetor contaQuitada do Adam
+        if (contaQuitada[i]) {
+            System.out.println("CONTA QUITADA!");
+        } else {
+            System.out.println("CONTA EM ABERTO!");
         }
     }
 
