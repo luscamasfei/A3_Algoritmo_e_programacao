@@ -22,7 +22,7 @@ public class Main {
      * • Valor do Débito (BigDecimal)
      * • Data de Vencimento (LocalDate) XXXX, XX, XX
      */
-
+/*
     static int[] contaNum = new int[1000];
     static String[] contaDesc = new String[1000];
     static String[] contaBenef = new String[1000];
@@ -31,28 +31,28 @@ public class Main {
     static int totalContas = 0; // Quantas contas existem
     static boolean[] contaQuitada = new boolean[1000];
     static BigDecimal[] contaSaldo = new BigDecimal[1000]; // Quanto falta para pagar a conta
-
+*/
     // ADAM: Para facilitar testes, fiz 5 documentos tipo placeholder. Para usar, é
     // só comentar as linhas acima e retirar o comentário destas.
 
-    /*
-     * static int[] contaNum = { 1, 2, 3, 4, 5 };
-     * static String[] contaDesc = { "PLACEHOLDER1", "PLACEHOLDER2", "PLACEHOLDER3",
-     * "PLACEHOLDER4", "PLACEHOLDER5" };
-     * static String[] contaBenef = { "Adam Schneider", "Sadam Aschneider",
-     * "Damdam Neineider", "Adam Schneider", "Sadam Aschneider" };
-     * static BigDecimal[] contaDebit = { new BigDecimal("1000.00"), new
-     * BigDecimal("2000.00"), new BigDecimal("3000.00"),
-     * new BigDecimal("4000.00"),
-     * new BigDecimal("5000.00") };
-     * static LocalDate[] contaData = { LocalDate.of(2021, 1, 1), LocalDate.of(2021,
-     * 1, 1), LocalDate.of(2021, 1, 1), LocalDate.of(2021, 1, 1),
-     * LocalDate.of(2021,
-     * 1, 1) };
-     * static int totalContas = 5;
-     * static boolean[] contaQuitada = { false, false, false, false, false };
-     * static BigDecimal[] contaSaldo = new BigDecimal[1000];
-     */
+
+     static int[] contaNum = { 1, 2, 3, 4, 5 };
+     static String[] contaDesc = { "PLACEHOLDER1", "PLACEHOLDER2", "PLACEHOLDER3",
+     "PLACEHOLDER4", "PLACEHOLDER5" };
+     static String[] contaBenef = { "Adam Schneider", "Sadam Aschneider",
+     "Damdam Neineider", "Adam Schneider", "Sadam Aschneider" };
+     static BigDecimal[] contaDebit = { new BigDecimal("1000.00"), new
+     BigDecimal("2000.00"), new BigDecimal("3000.00"),
+     new BigDecimal("4000.00"),
+     new BigDecimal("5000.00") };
+     static LocalDate[] contaData = { LocalDate.of(2030, 11, 22), LocalDate.of(2026,
+     11, 22), LocalDate.of(2026, 3, 14), LocalDate.of(2031, 4, 28),
+     LocalDate.of(2030,
+     2, 4) };
+     static int totalContas = 5;
+     static boolean[] contaQuitada = { false, false, false, false, false };
+     static BigDecimal[] contaSaldo = new BigDecimal[1000];
+
 
     /**
      * @param documento Número do documento (contaNum)
@@ -401,10 +401,20 @@ public class Main {
         int _index = 0;
         int tempTotalContas = 0;
 
-        // Luan: Preenche o vetor com as mesmas coisas que tem no contaData, mas apenas com os que não venceram.
+        // Luan: outros vetores para usar no System.out para mostrar o restante dos dados.
+        int[] tempContaNum = new int[totalContas];
+        String[] tempContaDesc = new String[totalContas];
+        String[] tempContaBenf = new String[totalContas];
+        BigDecimal[] tempContaDebit = new BigDecimal[totalContas];
+
+        // Luan: Preenche o vetor com as mesmas coisas que tem nos outros vetores, mas apenas com os que não venceram.
         for (int i = 0; i < totalContas; i++) {
             if (contaData[i].isAfter(hoje) || contaData[i].isEqual(hoje)) {
                 quaseNoVencimento[_index] = contaData[i];
+                tempContaNum[_index] = contaNum[i];
+                tempContaDesc[_index] = contaDesc[i];
+                tempContaBenf[_index] = contaBenef[i];
+                tempContaDebit[_index] = contaDebit[i];
                 _index += 1;
                 tempTotalContas += 1;
             }
@@ -413,24 +423,51 @@ public class Main {
         // Luan: Sort para arrumar a ordem por vencimento mais próximo da data atual do pc.
         for (int t = 0; t < tempTotalContas; t++) {
             LocalDate data1 = quaseNoVencimento[t];
-            int _indexData1 = t;
-            // 1
+            int _index1 = t;
+            int tempNum = tempContaNum[t];
+            String tempDesc = tempContaDesc[t];
+            String tempBenf = tempContaBenf[t];
+            BigDecimal tempDebit = tempContaDebit[t];
+
             for (int j = t + 1; j < tempTotalContas; j++) {
                 if (quaseNoVencimento[j].isBefore(data1)) {
                     data1 = quaseNoVencimento[j];
-                    _indexData1 = j;
+                    _index1 = j;
+                    tempNum = tempContaNum[j];
+                    tempDesc = tempContaDesc[j];
+                    tempBenf = tempContaBenf[j];
+                    tempDebit = tempContaDebit[j];
                 }
-
             }
-
-            LocalDate temp = quaseNoVencimento[t];
+            // Mexe no LocalDate.
+            LocalDate temp1 = quaseNoVencimento[t];
             quaseNoVencimento[t] = data1;
-            quaseNoVencimento[_indexData1] = temp;
+            quaseNoVencimento[_index1] = temp1;
+            // Mexe no tempContaNum.
+            int temp2 = tempContaNum[t];
+            tempContaNum[t] = tempNum;
+            tempContaNum[_index1] = temp2;
+            // Mexe no tempContaDesc.
+            String temp3 = tempContaDesc[t];
+            tempContaDesc[t] = tempDesc;
+            tempContaDesc[_index1] = temp3;
+            // Mexe no tempContaBenf.
+            String temp4 = tempContaBenf[t];
+            tempContaBenf[t] = tempBenf;
+            tempContaBenf[_index1] = temp4;
+            // Mexe no tempContaDebit.
+            BigDecimal temp5 = tempContaDebit[t];
+            tempContaDebit[t] = tempDebit;
+            tempContaDebit[_index1] = temp5;
         }
 
         // Luan: Após o sort, ele imprime tudo com todos os detalhes.
+        System.out.println("CONTAS A PAGAR POR DATA");
+        System.out.println(hoje.format(sdf) + "\n");
         for (int i = 0; i < tempTotalContas; i++) {
-            System.out.println("VENCIMENTO: " + quaseNoVencimento[i].format(sdf));
+            System.out.println("VENCIMENTO: " + quaseNoVencimento[i].format(sdf) + " | VALOR: "
+            + tempContaDebit[i] + " | DOCUMENTO: " + tempContaNum[i] + " | DESCRIÇÃO: " + tempContaDesc[i]
+            + " | BENEFICIÁRIO: " + tempContaBenf[i]);
         }
 
         System.out.println("==============================\n");
