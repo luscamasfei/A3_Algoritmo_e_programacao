@@ -133,7 +133,7 @@ public class Main {
                         incluirConta();
                         break;
                     case 2:
-                        System.out.println("=== ALTERAÇÃO ===");
+                        alterarConta();
                         break;
                     case 3:
                         System.out.println("=== CONSULTA === ");
@@ -156,7 +156,7 @@ public class Main {
 
 
     static void incluirConta() {
-        System.out.println("INCLUSÃO DE CONTA");
+        System.out.println("=== INCLUSÃO DE CONTA ===");
 
         // Lucas: Inserir documento
         System.out.print("DOCUMENTO: ");
@@ -202,6 +202,81 @@ public class Main {
             System.out.println("Conta incluída com sucesso!");
         } else {
             System.out.println("Inclusão cancelada!");
+        }
+    }
+
+
+    static void alterarConta() {
+        System.out.println("=== ALTERAÇÃO DE CONTA ===");
+
+        // Lucas: Inserir documento
+        System.out.print("DOCUMENTO: ");
+        int documento = sc.nextInt();
+        sc.nextLine();
+
+        // Lucas: Busca o documento e retorna -1 se não encontrar
+        int i = buscarConta(documento);
+        if (i == -1) {
+            System.out.println("Conta não encontrada");
+            return;
+        }
+
+
+        System.out.println("DESCRIÇÃO: " + contaDesc[i]);
+        System.out.println("BENEFICIÁRIO: " + contaBenef[i]);
+        System.out.println("VALOR: " + contaDebit[i]);
+        System.out.println("VENCIMENTO: " + contaData[i].format(sdf));
+
+
+        System.out.println("\nDigite os novos dados:");
+
+        // Lucas: Inserir nova descrição
+        System.out.print("DESCRIÇÃO: ");
+        String descricao = sc.nextLine();
+
+        // Lucas: Inserir novo beneficiario
+        System.out.print("BENEFICIÁRIO: ");
+        String beneficiario = sc.nextLine();
+
+
+        // Lucas: O valor só muda se a conta ainda não teve pagamento
+        BigDecimal valor = contaDebit[i];
+        // Lucas: O compareTo retorna 3 valores: -1, 0 e 1 sendo 0 os dois valores iguais
+        boolean semPagamento = contaDebit[i].compareTo(contaSaldo[i]) == 0;
+
+        if (semPagamento) {
+            System.out.print("VALOR: ");
+            String textoValor = sc.nextLine();
+            if (!textoValor.isEmpty()) {
+                valor = new BigDecimal(textoValor.replace(",", "."));
+            }
+        } else {
+            System.out.println("O valor não pode ser alterado, essa conta já foi paga!");
+        }
+
+        //Lucas: Inserir novo vencimento
+        System.out.print("VENCIMENTO (dd/mm/aaaa): ");
+        String textoData = sc.nextLine();
+        LocalDate vencimento = contaData[i];
+        if (!textoData.isEmpty()) {
+            vencimento = LocalDate.parse(textoData, sdf);
+        }
+
+        //Lucas: Confirma alteração utilizando o equals
+        System.out.print("CONFIRMA ALTERAÇÃO (S/N)? ");
+        String resposta = sc.nextLine();
+
+        if (resposta.equalsIgnoreCase("S")) {
+            contaDesc[i] = descricao;
+            contaBenef[i] = beneficiario;
+            if (semPagamento) {
+                contaDebit[i] = valor;
+                contaSaldo[i] = valor;
+            }
+            contaData[i] = vencimento;
+            System.out.println("Conta alterada com sucesso!");
+        } else {
+            System.out.println("Alteração cancelada!");
         }
     }
 
