@@ -130,7 +130,7 @@ public class Main {
 
                 switch (opcaoCadastro) {
                     case 1:
-                        System.out.println("=== INCLUSÃO ===");
+                        incluirConta();
                         break;
                     case 2:
                         System.out.println("=== ALTERAÇÃO ===");
