@@ -355,7 +355,38 @@ public class Main {
 
     static void gerarRelatorio() {
         System.out.println("==================\nGERANDO RELATÓRIO... \n");
-        // Gerar relatório. Tela 1.3
+        int opcaoRelatorio = -1;
+
+        do {
+            System.out.println("RELATORIO\n");
+            System.out.println("1 - CONTAS A PAGAR");
+            System.out.println("2 - CONTAS VENCIDAS");
+            System.out.println("3 - BALANÇO DE DESPESAS");
+            System.out.println("0 - VOLTAR\n");
+
+            if (sc.hasNextInt()) {
+                opcaoRelatorio = sc.nextInt();
+                sc.nextLine();
+
+                switch (opcaoRelatorio) {
+                    // Os prints são testes.
+                    case 1:
+                        System.out.println("Funcionando");
+                        break;
+                    case 2:
+                        System.out.println("Funcionando");
+                        break;
+                    case 3:
+                        System.out.println("Funcionando");
+                        break;
+                    default:
+                        System.out.println("Opção inválida.");
+                }
+            } else {
+                System.out.println("Opção inválida. Digite um número.");
+                sc.next();
+            }
+        } while (opcaoRelatorio != 0);
         System.out.println("==================\n");
     }
 
