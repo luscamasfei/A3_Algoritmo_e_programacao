@@ -187,13 +187,20 @@ public class Main {
         BigDecimal valor = sc.nextBigDecimal();
         sc.nextLine();
 
-        // Lucas: Transforma o texto em data usando o formato que o Adam criou
-        System.out.print("VENCIMENTO (dd/mm/aaaa): ");
-        LocalDate vencimento = LocalDate.parse(sc.nextLine(), sdf);
+        // ADAM: Recebe uma String e converte em LocalDate com failsafe.
+        LocalDate vencimentoFormatado = null;
+        while (vencimentoFormatado == null) {
+            System.out.print("VENCIMENTO (dd/mm/aaaa): ");
+            String vencimento = sc.nextLine();
+            try {
+                vencimentoFormatado = LocalDate.parse(vencimento, sdf);
+            } catch (DateTimeParseException e) {
+                System.out.println("Formatação inválida! Por favor use dd/mm/aaaa.");
+            }
+        }
 
         // Lucas: Confirmação de Sim ou Não utilizando o equals para ignorar o tamanho
         // da letra
-        System.out.print("CONFIRMA INCLUSÃO (S/N)? ");
         String resposta = sc.nextLine();
 
         if (resposta.equalsIgnoreCase("S")) {
@@ -202,7 +209,7 @@ public class Main {
             contaBenef[totalContas] = beneficiario;
             contaDebit[totalContas] = valor;
             contaSaldo[totalContas] = valor;
-            contaData[totalContas] = vencimento;
+            contaData[totalContas] = vencimentoFormatado;
             // Lucas: Aumenta o contador de contas depois de guardar
             totalContas++;
             System.out.println("Conta incluída com sucesso!");
