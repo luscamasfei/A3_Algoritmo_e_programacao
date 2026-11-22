@@ -154,6 +154,57 @@ public class Main {
         System.out.println("==================\n");
     }
 
+
+    static void incluirConta() {
+        System.out.println("INCLUSÃO DE CONTA");
+
+        // Lucas: Inserir documento
+        System.out.print("DOCUMENTO: ");
+        int documento = sc.nextInt();
+        sc.nextLine();
+
+        // Lucas: Não permite cadastrar contas repetidas
+        if (buscarConta(documento) != -1) {
+            System.out.println("Este documento já está cadastrado.");
+            return;
+        }
+
+        // Lucas: Inserir a descrição
+        System.out.print("DESCRIÇÃO: ");
+        String descricao = sc.nextLine();
+
+        // Lucas: Inserir beneficiário
+        System.out.print("BENEFICIÁRIO: ");
+        String beneficiario = sc.nextLine();
+
+        // Lucas: Inserir valor
+        System.out.print("VALOR: ");
+        BigDecimal valor = sc.nextBigDecimal();
+        sc.nextLine();
+
+        // Lucas: Transforma o texto em data usando o formato que o Adam criou
+        System.out.print("VENCIMENTO (dd/mm/aaaa): ");
+        LocalDate vencimento = LocalDate.parse(sc.nextLine(), sdf);
+
+        // Lucas: Confirmação de Sim ou Não utilizando o equals para ignorar o tamanho da letra
+        System.out.print("CONFIRMA INCLUSÃO (S/N)? ");
+        String resposta = sc.nextLine();
+
+        if (resposta.equalsIgnoreCase("S")) {
+            contaNum[totalContas] = documento;
+            contaDesc[totalContas] = descricao;
+            contaBenef[totalContas] = beneficiario;
+            contaDebit[totalContas] = valor;
+            contaSaldo[totalContas] = valor;
+            contaData[totalContas] = vencimento;
+            // Lucas: Aumenta o contador de contas depois de guardar
+            totalContas++;
+            System.out.println("Conta incluída com sucesso!");
+        } else {
+            System.out.println("Inclusão cancelada!");
+        }
+    }
+
     static void baixarConta() {
 
         System.out.println("==================\nBAIXANDO CONTA... \n");
