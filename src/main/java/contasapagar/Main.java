@@ -393,6 +393,49 @@ public class Main {
         System.out.println("==================\n");
     }
 
+    static void listContasAPagar() {
+        // Luan: quaseNoVencimento é um vetor separado para não modificar tudo direto do contaData.
+        // Além disso, serve apenas para os que não passaram da data de vencimento.
+        LocalDate[] quaseNoVencimento = new LocalDate[totalContas];
+        LocalDate hoje = LocalDate.now();
+        int _index = 0;
+        int tempTotalContas = 0;
+
+        // Luan: Preenche o vetor com as mesmas coisas que tem no contaData, mas apenas com os que não venceram.
+        for (int i = 0; i < totalContas; i++) {
+            if (contaData[i].isAfter(hoje) || contaData[i].isEqual(hoje)) {
+                quaseNoVencimento[_index] = contaData[i];
+                _index += 1;
+                tempTotalContas += 1;
+            }
+        }
+
+        // Luan: Sort para arrumar a ordem por vencimento mais próximo da data atual do pc.
+        for (int t = 0; t < tempTotalContas; t++) {
+            LocalDate data1 = quaseNoVencimento[t];
+            int _indexData1 = t;
+            // 1
+            for (int j = t + 1; j < tempTotalContas; j++) {
+                if (quaseNoVencimento[j].isBefore(data1)) {
+                    data1 = quaseNoVencimento[j];
+                    _indexData1 = j;
+                }
+
+            }
+
+            LocalDate temp = quaseNoVencimento[t];
+            quaseNoVencimento[t] = data1;
+            quaseNoVencimento[_indexData1] = temp;
+        }
+
+        // Luan: Após o sort, ele imprime tudo com todos os detalhes.
+        for (int i = 0; i < tempTotalContas; i++) {
+            System.out.println("VENCIMENTO: " + quaseNoVencimento[i].format(sdf));
+        }
+
+        System.out.println("==============================\n");
+    }
+
     static void gerarRelatorio() {
         System.out.println("==================\nGERANDO RELATÓRIO... \n");
         int opcaoRelatorio = -1;
@@ -411,7 +454,7 @@ public class Main {
                 switch (opcaoRelatorio) {
                     // Os prints são testes.
                     case 1:
-                        System.out.println("Funcionando");
+                        listContasAPagar();
                         break;
                     case 2:
                         System.out.println("Funcionando");
