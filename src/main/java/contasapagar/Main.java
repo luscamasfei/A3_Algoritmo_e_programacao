@@ -1,6 +1,9 @@
 package contasapagar;
 
+import java.time.Month;
 import java.time.format.DateTimeParseException;
+import java.time.format.TextStyle;
+import java.util.Locale;
 import java.util.Scanner;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -45,10 +48,10 @@ public class Main {
      BigDecimal("2000.00"), new BigDecimal("3000.00"),
      new BigDecimal("4000.00"),
      new BigDecimal("5000.00") };
-     static LocalDate[] contaData = { LocalDate.of(2018, 11, 22), LocalDate.of(2026,
+     static LocalDate[] contaData = { LocalDate.of(2016, 3, 22), LocalDate.of(2016,
      11, 22), LocalDate.of(2016, 3, 14), LocalDate.of(2031, 4, 28),
-     LocalDate.of(2019,
-     2, 4) };
+     LocalDate.of(2016,
+     3, 4) };
      static int totalContas = 5;
      static boolean[] contaQuitada = { false, false, false, false, false };
      static BigDecimal[] contaSaldo = new BigDecimal[1000];
@@ -482,7 +485,7 @@ public class Main {
         BigDecimal[] tempContaDebit = new BigDecimal[totalContas];
         LocalDate[] contasVencidas = new LocalDate[totalContas];
 
-        // Luan: Hoje é usado em algumas condicionais.
+        // Luan: A variavel "hoje" é usado como condição.
         LocalDate hoje = LocalDate.now();
         // Variaveis.
         int _index = 0;
@@ -553,6 +556,54 @@ public class Main {
         System.out.println("==============================\n");
     }
 
+    static BigDecimal somaDespesasMensal(int mes, int ano) {
+        BigDecimal debitoMensalTotal = BigDecimal.valueOf(0);
+
+        for (int i = 0; i < totalContas; i++) {
+            if ((contaData[i].getMonthValue()) == mes && contaData[i].getYear() == ano) {
+                debitoMensalTotal = debitoMensalTotal.add(contaDebit[i]);
+            }
+        }
+
+        return debitoMensalTotal;
+    }
+
+    static void balancoDespesas() {
+        System.out.println("====================\n");
+        System.out.println("Escolha um ano para mostrar as despesas:\n");
+        int anoEscolhido = 0;
+
+        if (sc.hasNextInt()) {
+            anoEscolhido = sc.nextInt();
+        } else {
+            System.out.println("Opção inválida. Escolha um ano.");
+        }
+
+        BigDecimal[] debitoMes = new BigDecimal[12];
+        // Luan: inicia todos os meses com valor 0.
+        for (int i = 0; i < 12; i++) {
+            debitoMes[i] = BigDecimal.valueOf(0);
+        }
+
+        System.out.println("BALANÇO DE DESPESAS DE " + anoEscolhido);
+        System.out.println("JANEIRO A DEZEMBRO");
+        System.out.println("MÊS | TOTAL DE DESPESAS\n");
+        for (int i = 0; i < 12; i++) {
+            debitoMes[i] = somaDespesasMensal(i, anoEscolhido);
+
+            // Luan: Garante que não há um mês sem nenhum débito.
+            // Se houver um mês sem nada devendo, ele não imprime e pula.
+            if (debitoMes[i].compareTo(BigDecimal.valueOf(0)) > 0) {
+                System.out.println(
+                        Month.of(i).getDisplayName(TextStyle.FULL, new Locale("pt", "BR")).toUpperCase()
+                        + " | R$" + debitoMes[i]
+                );
+            }
+        }
+
+        System.out.println("==============================\n");
+    }
+
     static void gerarRelatorio() {
         System.out.println("==================\nGERANDO RELATÓRIO... \n");
         int opcaoRelatorio = -1;
@@ -577,7 +628,7 @@ public class Main {
                         listContasVencidas();
                         break;
                     case 3:
-                        System.out.println("Funcionando");
+                        balancoDespesas();
                         break;
                     default:
                         System.out.println("Opção inválida.");
