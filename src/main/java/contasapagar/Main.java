@@ -45,9 +45,9 @@ public class Main {
      BigDecimal("2000.00"), new BigDecimal("3000.00"),
      new BigDecimal("4000.00"),
      new BigDecimal("5000.00") };
-     static LocalDate[] contaData = { LocalDate.of(2030, 11, 22), LocalDate.of(2026,
-     11, 22), LocalDate.of(2026, 3, 14), LocalDate.of(2031, 4, 28),
-     LocalDate.of(2030,
+     static LocalDate[] contaData = { LocalDate.of(2018, 11, 22), LocalDate.of(2026,
+     11, 22), LocalDate.of(2016, 3, 14), LocalDate.of(2031, 4, 28),
+     LocalDate.of(2019,
      2, 4) };
      static int totalContas = 5;
      static boolean[] contaQuitada = { false, false, false, false, false };
@@ -473,6 +473,86 @@ public class Main {
         System.out.println("==============================\n");
     }
 
+    static void listContasVencidas() {
+        // Cria vetores temporarios para não causar problemas nos principais do sistema.
+
+        int[] tempContaNum = new int[totalContas];
+        String[] tempContaDesc = new String[totalContas];
+        String[] tempContaBenf = new String[totalContas];
+        BigDecimal[] tempContaDebit = new BigDecimal[totalContas];
+        LocalDate[] contasVencidas = new LocalDate[totalContas];
+
+        // Luan: Hoje é usado em algumas condicionais.
+        LocalDate hoje = LocalDate.now();
+        // Variaveis.
+        int _index = 0;
+        int tempTotalContas = 0;
+
+        // Luan: Busca encontrar quais já estão vencidas. Ou seja, já passaram do prazo de vencimento.
+        for (int i = 0; i < totalContas; i++) {
+            if (contaData[i].isBefore(hoje)) {
+                contasVencidas[_index] = contaData[i];
+                tempContaNum[_index] = contaNum[i];
+                tempContaDesc[_index] = contaDesc[i];
+                tempContaBenf[_index] = contaBenef[i];
+                tempContaDebit[_index] = contaDebit[i];
+                _index += 1;
+                tempTotalContas += 1;
+            }
+        }
+
+        for (int t = 0; t < tempTotalContas; t++) {
+            LocalDate data1 = contasVencidas[t];
+            int _index1 = t;
+            int Num1 = tempContaNum[t];
+            String Desc1 = tempContaDesc[t];
+            String Benf1 = tempContaBenf[t];
+            BigDecimal Debit1 = tempContaDebit[t];
+
+            for (int i = t + 1; i < tempTotalContas; i++) {
+                if (contasVencidas[i].isBefore(data1)) {
+                    data1 = contasVencidas[i];
+                    _index1 = i;
+                    Num1 = tempContaNum[i];
+                    Desc1 = tempContaDesc[i];
+                    Benf1 = tempContaBenf[i];
+                    Debit1 = tempContaDebit[i];
+                }
+            }
+            // Mexe no contasVencidas.
+            LocalDate temp1 = contasVencidas[t];
+            contasVencidas[t] = data1;
+            contasVencidas[_index1] = temp1;
+            // Mexe no tempContaNum.
+            int temp2 = tempContaNum[t];
+            tempContaNum[t] = Num1;
+            tempContaNum[_index1] = temp2;
+            // Mexe no tempContaDesc.
+            String temp3 = tempContaDesc[t];
+            tempContaDesc[t] = Desc1;
+            tempContaDesc[_index1] = temp3;
+            // Mexe no tempContaBenf.
+            String temp4 = tempContaBenf[t];
+            tempContaBenf[t] = Benf1;
+            tempContaBenf[_index1] = temp4;
+            // Mexe no tempContaDebit.
+            BigDecimal temp5 = tempContaDebit[t];
+            tempContaDebit[t] = Debit1;
+            tempContaDebit[_index1] = temp5;
+        }
+
+        // Imprime a lista.
+        System.out.println("CONTAS VENCIDAS");
+        System.out.println(hoje.format(sdf) + "\n");
+        for (int i = 0; i < tempTotalContas; i++) {
+            System.out.println("VENCIMENTO: " + contasVencidas[i].format(sdf) + " | VALOR: "
+                    + tempContaDebit[i] + " | DOCUMENTO: " + tempContaNum[i] + " | DESCRIÇÃO: " + tempContaDesc[i]
+                    + " | BENEFICIÁRIO: " + tempContaBenf[i]);
+        }
+
+        System.out.println("==============================\n");
+    }
+
     static void gerarRelatorio() {
         System.out.println("==================\nGERANDO RELATÓRIO... \n");
         int opcaoRelatorio = -1;
@@ -494,7 +574,7 @@ public class Main {
                         listContasAPagar();
                         break;
                     case 2:
-                        System.out.println("Funcionando");
+                        listContasVencidas();
                         break;
                     case 3:
                         System.out.println("Funcionando");
