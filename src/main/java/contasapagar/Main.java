@@ -147,19 +147,24 @@ public class Main {
                         System.out.println("Opção inválida.");
                 }
             } else {
-                System.out.println("Você precisa digitar um númmero!");
+                System.out.println("Você precisa digitar um número!");
                 sc.nextLine();
             }
         } while (opcaoCadastro != 0);
         System.out.println("==================\n");
     }
 
-
     static void incluirConta() {
         System.out.println("=== INCLUSÃO DE CONTA ===");
 
         // Lucas: Inserir documento
         System.out.print("DOCUMENTO: ");
+        // Failsafe
+        while (!sc.hasNextInt()) {
+            System.out.println("Número de documento inválido.");
+            sc.next();
+            System.out.println("Digite o número do documento.\n");
+        }
         int documento = sc.nextInt();
         sc.nextLine();
 
@@ -186,7 +191,8 @@ public class Main {
         System.out.print("VENCIMENTO (dd/mm/aaaa): ");
         LocalDate vencimento = LocalDate.parse(sc.nextLine(), sdf);
 
-        // Lucas: Confirmação de Sim ou Não utilizando o equals para ignorar o tamanho da letra
+        // Lucas: Confirmação de Sim ou Não utilizando o equals para ignorar o tamanho
+        // da letra
         System.out.print("CONFIRMA INCLUSÃO (S/N)? ");
         String resposta = sc.nextLine();
 
@@ -205,12 +211,17 @@ public class Main {
         }
     }
 
-
     static void alterarConta() {
         System.out.println("=== ALTERAÇÃO DE CONTA ===");
 
         // Lucas: Inserir documento
         System.out.print("DOCUMENTO: ");
+        // Failsafe
+        while (!sc.hasNextInt()) {
+            System.out.println("Número de documento inválido.");
+            sc.next();
+            System.out.println("Digite o número do documento.\n");
+        }
         int documento = sc.nextInt();
         sc.nextLine();
 
@@ -221,12 +232,10 @@ public class Main {
             return;
         }
 
-
         System.out.println("DESCRIÇÃO: " + contaDesc[i]);
         System.out.println("BENEFICIÁRIO: " + contaBenef[i]);
         System.out.println("VALOR: " + contaDebit[i]);
         System.out.println("VENCIMENTO: " + contaData[i].format(sdf));
-
 
         System.out.println("\nDigite os novos dados:");
 
@@ -238,10 +247,10 @@ public class Main {
         System.out.print("BENEFICIÁRIO: ");
         String beneficiario = sc.nextLine();
 
-
         // Lucas: O valor só muda se a conta ainda não teve pagamento
         BigDecimal valor = contaDebit[i];
-        // Lucas: O compareTo retorna 3 valores: -1, 0 e 1 sendo 0 os dois valores iguais
+        // Lucas: O compareTo retorna 3 valores: -1, 0 e 1 sendo 0 os dois valores
+        // iguais
         boolean semPagamento = contaDebit[i].compareTo(contaSaldo[i]) == 0;
 
         if (semPagamento) {
@@ -254,7 +263,7 @@ public class Main {
             System.out.println("O valor não pode ser alterado, essa conta já foi paga!");
         }
 
-        //Lucas: Inserir novo vencimento
+        // Lucas: Inserir novo vencimento
         System.out.print("VENCIMENTO (dd/mm/aaaa): ");
         String textoData = sc.nextLine();
         LocalDate vencimento = contaData[i];
@@ -262,7 +271,7 @@ public class Main {
             vencimento = LocalDate.parse(textoData, sdf);
         }
 
-        //Lucas: Confirma alteração utilizando o equals
+        // Lucas: Confirma alteração utilizando o equals
         System.out.print("CONFIRMA ALTERAÇÃO (S/N)? ");
         String resposta = sc.nextLine();
 
