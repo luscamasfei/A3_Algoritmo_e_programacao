@@ -201,6 +201,7 @@ public class Main {
 
         // Lucas: Confirmação de Sim ou Não utilizando o equals para ignorar o tamanho
         // da letra
+        System.out.print("CONFIRMA INCLUSÃO (S/N)? ");
         String resposta = sc.nextLine();
 
         if (resposta.equalsIgnoreCase("S")) {
