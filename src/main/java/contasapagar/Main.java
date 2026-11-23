@@ -451,13 +451,23 @@ public class Main {
             sc.nextLine();
             String resposta = sc.nextLine();
             if (resposta.trim().equalsIgnoreCase("S")) {
-                contaNum[i] = 0;
-                contaDesc[i] = null;
-                contaBenef[i] = null;
-                contaDebit[i] = null;
-                contaSaldo[i] = null;
-                contaData[i] = null;
+
+                for (int j = i; j < totalContas - 1; j++) {
+                    contaNum[j] = contaNum[j + 1];
+                    contaDesc[j] = contaDesc[j + 1];
+                    contaBenef[j] = contaBenef[j + 1];
+                    contaDebit[j] = contaDebit[j + 1];
+                    contaSaldo[j] = contaSaldo[j + 1];
+                    contaData[j] = contaData[j + 1];
+                }
+                contaNum[totalContas - 1] = 0;
+                contaDesc[totalContas - 1] = null;
+                contaBenef[totalContas - 1] = null;
+                contaDebit[totalContas - 1] = null;
+                contaSaldo[totalContas - 1] = null;
+                contaData[totalContas - 1] = null;
                 totalContas--;
+
                 System.out.println("Conta excluída com sucesso!");
             } else {
                 System.out.println("Exclusão cancelada!");
