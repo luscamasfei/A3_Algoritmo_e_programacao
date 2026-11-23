@@ -53,7 +53,9 @@ public class Main {
                     4, 4) };
     static int totalContas = 5;
     static boolean[] contaQuitada = { false, false, false, false, false };
-    static BigDecimal[] contaSaldo = new BigDecimal[1000];
+    static BigDecimal[] contaSaldo = { new BigDecimal("1000.00"), new BigDecimal("2000.00"), new BigDecimal("3000.00"),
+            new BigDecimal("4000.00"),
+            new BigDecimal("5000.00") };
 
     /**
      * Procura por um documento no vetor contaNum[].
@@ -309,7 +311,7 @@ public class Main {
         // iguais
         boolean semPagamento = contaDebit[i].compareTo(contaSaldo[i]) == 0;
 
-        if (semPagamento) {
+        if (semPagamento == true) {
             System.out.print("VALOR: ");
             String textoValor = sc.nextLine();
             if (!textoValor.isEmpty()) {
@@ -320,11 +322,15 @@ public class Main {
         }
 
         // Lucas: Inserir novo vencimento
-        System.out.print("VENCIMENTO (dd/mm/aaaa): ");
-        String textoData = sc.nextLine();
-        LocalDate vencimento = contaData[i];
-        if (!textoData.isEmpty()) {
-            vencimento = LocalDate.parse(textoData, sdf);
+        LocalDate vencimentoFormatado = null;
+        while (vencimentoFormatado == null) {
+            System.out.print("VENCIMENTO (dd/mm/aaaa): ");
+            String vencimento = sc.nextLine();
+            try {
+                vencimentoFormatado = LocalDate.parse(vencimento, sdf);
+            } catch (DateTimeParseException e) {
+                System.out.println("Formatação inválida! Por favor use dd/mm/aaaa.");
+            }
         }
 
         // Lucas: Confirma alteração utilizando o equals
@@ -338,7 +344,7 @@ public class Main {
                 contaDebit[i] = valor;
                 contaSaldo[i] = valor;
             }
-            contaData[i] = vencimento;
+            contaData[i] = vencimentoFormatado;
             System.out.println("Conta alterada com sucesso!");
         } else {
             System.out.println("Alteração cancelada!");
