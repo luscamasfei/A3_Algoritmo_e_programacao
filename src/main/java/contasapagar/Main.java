@@ -633,7 +633,9 @@ public class Main {
         System.out.println("====================\n");
         System.out.println("Escolha um ano para mostrar as despesas:\n");
         int anoEscolhido = 0;
+        boolean anoEncontrado = true;
 
+        // Luan: Garante que o usuário não insira uma resposta inválida.
         while (!sc.hasNextInt()) {
             System.out.println("Opção inválida.");
             sc.next();
@@ -641,51 +643,68 @@ public class Main {
         }
         anoEscolhido = sc.nextInt();
 
-        BigDecimal[] debitoMes = new BigDecimal[12];
-        String[] maiorBenf = new String[12];
-        // Luan: inicia todos os meses com valor 0.
-        for (int i = 0; i < 12; i++) {
-            debitoMes[i] = BigDecimal.valueOf(0);
+        // Luan: Busca ver se o ano escolhido terá algum dado ou não.
+        // garante o sistema não realizar o restante do código atoa.
+        for (int i = 0; i < totalContas; i++) {
+            if (contaData[i].getYear() == anoEscolhido) {
+                anoEncontrado = true;
+            } else {
+                anoEncontrado = false;
+            }
         }
 
-        System.out.println("BALANÇO DE DESPESAS DE " + anoEscolhido);
-        System.out.println("JANEIRO A DEZEMBRO");
-        System.out.println("MÊS | TOTAL DE DESPESAS | MAIOR BENEFICIÁRIO\n");
-        for (int i = 0; i < 12; i++) {
-            BigDecimal debitoMensalTotal = BigDecimal.valueOf(0);
-            String temp1 = "a";
-            double compararDebit = 0;
-            int mes = i;
+        if (anoEncontrado == true) {
+            BigDecimal[] debitoMes = new BigDecimal[12];
+            String[] maiorBenf = new String[12];
 
-            for (int j = 0; j < totalContas; j++) {
-                if ((contaData[j].getMonthValue()) == mes && contaData[j].getYear() == anoEscolhido) {
-                    debitoMensalTotal = debitoMensalTotal.add(contaDebit[j]);
+            // Luan: inicia todos os meses com valor 0.
+            for (int i = 0; i < 12; i++) {
+                debitoMes[i] = BigDecimal.valueOf(0);
+            }
 
-                    double compararDebit2 = contaDebit[j].doubleValue();
-                    if (compararDebit2 > compararDebit) {
-                        compararDebit = compararDebit2;
-                        temp1 = contaBenef[j];
+            System.out.println("BALANÇO DE DESPESAS DE " + anoEscolhido);
+            System.out.println("JANEIRO A DEZEMBRO");
+            System.out.println("MÊS | TOTAL DE DESPESAS | MAIOR BENEFICIÁRIO\n");
+            for (int i = 0; i < 12; i++) {
+                BigDecimal debitoMensalTotal = BigDecimal.valueOf(0);
+                String temp1 = "a";
+                double compararDebit = 0;
+                int mes = i;
+
+                for (int j = 0; j < totalContas; j++) {
+                    if ((contaData[j].getMonthValue()) == mes && contaData[j].getYear() == anoEscolhido) {
+                        debitoMensalTotal = debitoMensalTotal.add(contaDebit[j]);
+
+                        double compararDebit2 = contaDebit[j].doubleValue();
+                        if (compararDebit2 > compararDebit) {
+                            compararDebit = compararDebit2;
+                            temp1 = contaBenef[j];
+                        }
                     }
                 }
-            }
-            debitoMes[i] = debitoMes[i].add(debitoMensalTotal);
+                debitoMes[i] = debitoMes[i].add(debitoMensalTotal);
 
-            // Luan: Garante que não há um mês sem nenhum débito.
-            // Se houver um mês sem nada devendo, ele não imprime e pula.
-            if (debitoMes[i].compareTo(BigDecimal.valueOf(0)) > 0) {
-                System.out.println(
-                        Month.of(i).getDisplayName(TextStyle.FULL, new Locale("pt", "BR")).toUpperCase()
-                        + " | R$" + debitoMes[i]
-                        + " | " + temp1
-                );
+                // Luan: Garante que não há um mês sem nenhum débito.
+                // Se houver um mês sem nada devendo, ele não imprime e pula.
+                if (debitoMes[i].compareTo(BigDecimal.valueOf(0)) > 0) {
+                    System.out.println(
+                            Month.of(i).getDisplayName(TextStyle.FULL, new Locale("pt", "BR")).toUpperCase()
+                                    + " | R$" + debitoMes[i]
+                                    + " | " + temp1
+                    );
+                }
             }
+        } else {
+            System.out.println("Nenhum registro encontrado para este ano!");
         }
-
         System.out.println("==============================\n");
     }
 
     /**
      * Printa o submenu de relatórios.
+     *
+     * Exibe a opção para ver a lista das contas a pagar,
+     * contas vencidas, e o valanço de despesas.
      */
     static void gerarRelatorio() {
         System.out.println("==================\nGERANDO RELATÓRIO... \n");
