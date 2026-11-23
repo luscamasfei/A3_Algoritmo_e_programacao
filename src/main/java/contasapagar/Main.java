@@ -363,6 +363,11 @@ public class Main {
 
         // Lucas: Inserir documento
         System.out.print("DOCUMENTO: ");
+        while (!sc.hasNextInt()) {
+            System.out.println("Número de documento inválido.");
+            sc.next();
+            System.out.println("Digite o número do documento.\n");
+        }
         int documento = sc.nextInt();
         sc.nextLine();
 
