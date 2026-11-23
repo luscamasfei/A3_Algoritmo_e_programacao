@@ -58,8 +58,9 @@ public class Main {
 
 
     /**
+     * Procura por um documento no vetor contaNum[].
      * @param documento Número do documento (contaNum)
-     * @return Devole o valor da posição da conta, ou -1 se não encontrar
+     * @return Devolve o valor da posição da conta, ou -1 se não encontrar
      */
     static int buscarConta(int documento) {
         for (int i = 0; i < totalContas; i++) {
@@ -70,6 +71,13 @@ public class Main {
         return -1;
     }
 
+    /**
+     * Exibe o menu principal do sistema.
+     * Apresenta as opção para cadastrar contas,
+     * realizar baixas e acessar o menu de relatórios.
+     *
+     * Permite finalizar a execução do sistema.
+     */
     public static void Menu() {
         int opcao = 0;
         do {
@@ -115,6 +123,12 @@ public class Main {
         } while (opcao != 0);
     }
 
+    /**
+     * Exibe o submenu de gerenciamento de contas, apresenta as
+     * opções de inclusão, alteração, consulta e exclusão de conta.
+     *
+     * Permite também o usuário retornar ao menu principal.
+     */
     static void cadastrarConta() {
         System.out.println("==================\nCADASTRANDO CONTA... \n");
         // Lucas: Menu de cadastro já com failsafe
@@ -158,6 +172,14 @@ public class Main {
         System.out.println("==================\n");
     }
 
+    /**
+     * Realiza a inclusão de uma nova conta no sistema.
+     * Pede dados para registrar a descrição, beneficiário,
+     * valor do débito e a data de vencimento.
+     *
+     * Verefica se o documento já foi cadastrado no sistema
+     * e solicita uma confirmação antes de registrar.
+     */
     static void incluirConta() {
         System.out.println("=== INCLUSÃO DE CONTA ===");
 
@@ -223,6 +245,19 @@ public class Main {
         }
     }
 
+    /**
+     * Realiza a alteração de uma conta já existente no sistema.
+     * Pede o número do documento a ser alterado, exibindo se encontrou
+     * ou não a conta.
+     *
+     * Caso encontre, exibe suas informações e pede a nova descrição,
+     * beneficiário, valor do débito e a data de vencimento.
+     *
+     * Impede a alteração do valor do débito caso a conta já tenha
+     * recebido algum pagamento, parcial ou total.
+     *
+     * No final, pede uma confirmação para alterar a conta.
+     */
     static void alterarConta() {
         System.out.println("=== ALTERAÇÃO DE CONTA ===");
 
@@ -301,6 +336,15 @@ public class Main {
         }
     }
 
+    /**
+     * Pede o número do documento e busca pela conta.
+     *
+     * Caso falhe em encontrar, avisa com uma mensagem.
+     *
+     * Caso encontre a conta, exibe todas as informações da conta,
+     * incluindo seu valor original, saldo restante, data de vencimento
+     * e a situação atual (quitada ou em aberto).
+     */
     static void consultarConta() {
         System.out.println("=== CONSULTA DE CONTA ===");
 
@@ -332,6 +376,15 @@ public class Main {
         }
     }
 
+    /**
+     * Solicita o número do documento para localizar uma conta.
+     * Exibe seus dados e verifica se já foi quitada ou permanece em aberto.
+     *
+     * Caso esteja aberta, permite o usuário registrar uma baixa parcial ou total,
+     * impedindo pagamentos que exceda o débito atual.
+     *
+     * Quando o débito for pago, registra a conta como quitada no sistema.
+     */
     static void baixarConta() {
 
         System.out.println("==================\nBAIXANDO CONTA... \n");
@@ -396,6 +449,14 @@ public class Main {
         System.out.println("==================\n");
     }
 
+    /**
+     * Cria uma lista temporária de contas para vencer, organizando-as
+     * com o algoritmo Selection Sort, com base nas datas de vencimento.
+     *
+     * As contas prestes a vencerem aparecem primeiro,
+     * enquanto as que ainda levarão um tempo para vencer,
+     * são exibidas no final.
+     */
     static void listContasAPagar() {
         // Luan: quaseNoVencimento é um vetor separado para não modificar tudo direto do contaData.
         // Além disso, serve apenas para os que não passaram da data de vencimento.
@@ -476,6 +537,13 @@ public class Main {
         System.out.println("==============================\n");
     }
 
+    /**
+     * Cria uma lista temporária de contas vencidas, organizando-as
+     * com o algoritmo Selection Sort, com base nas datas de vencimento.
+     *
+     * As contas vencidas há mais tempo aparecem primeiro,
+     * enquanto as mais recentemente vencidas são exibidas no final da lista.
+     */
     static void listContasVencidas() {
         // Cria vetores temporarios para não causar problemas nos principais do sistema.
 
@@ -556,6 +624,11 @@ public class Main {
         System.out.println("==============================\n");
     }
 
+    /**
+     * Exibe o balanço de despesas de um ano escolhido pelo usuário.
+     * Mostrando apenas os meses que possuem despesas, o valor total gasto em cada mês
+     * E o seu respectivo maior beneficiário.
+     */
     static void balancoDespesas() {
         System.out.println("====================\n");
         System.out.println("Escolha um ano para mostrar as despesas:\n");
@@ -611,6 +684,9 @@ public class Main {
         System.out.println("==============================\n");
     }
 
+    /**
+     * Printa o submenu de relatórios.
+     */
     static void gerarRelatorio() {
         System.out.println("==================\nGERANDO RELATÓRIO... \n");
         int opcaoRelatorio = -1;
