@@ -430,20 +430,27 @@ public class Main {
 
                 BigDecimal baixa_valorPago = sc.nextBigDecimal();
 
-                if ((baixa_valorPago.compareTo(contaDebit[i])) < 0) {
-                    BigDecimal baixa_valorFinal = contaDebit[i].subtract(baixa_valorPago);
-                    contaDebit[i] = baixa_valorFinal;
-                    System.out.println("\nConta baixada com sucesso.");
+                // Não permite números negativos a serem usados em baixa.
+                if (baixa_valorPago.compareTo(BigDecimal.ZERO) < 0) {
+                    System.out.println("\nValores negativos não podem ser usados. Tente novamente.");
+                } else {
+                    // Número menor que valor do débito.
+                    if ((baixa_valorPago.compareTo(contaDebit[i])) < 0) {
+                        BigDecimal baixa_valorFinal = contaDebit[i].subtract(baixa_valorPago);
+                        contaDebit[i] = baixa_valorFinal;
+                        System.out.println("\nConta baixada com sucesso.");
 
-                } else if ((baixa_valorPago.compareTo(contaDebit[i])) > 0) {
-                    System.out.println(
-                            "\nO valor inserido foi maior do que o débito da conta. Favor inserir um valor menor ou igual ao débito.");
+                        // Número maior que valor do débito.
+                    } else if ((baixa_valorPago.compareTo(contaDebit[i])) > 0) {
+                        System.out.println(
+                                "\nO valor inserido foi maior do que o débito da conta. Favor inserir um valor menor ou igual ao débito.");
 
-                } else if ((baixa_valorPago.compareTo(contaDebit[i])) == 0) {
-                    contaDebit[i] = contaDebit[i].subtract(baixa_valorPago);
-                    System.out.println("\nA conta de ID " + contaNum[i] + " foi quitada.\n");
-                    contaQuitada[i] = true;
-
+                        // Número igual o valor do débito.
+                    } else if ((baixa_valorPago.compareTo(contaDebit[i])) == 0) {
+                        contaDebit[i] = contaDebit[i].subtract(baixa_valorPago);
+                        System.out.println("\nA conta de ID " + contaNum[i] + " foi quitada.\n");
+                        contaQuitada[i] = true;
+                    }
                 }
             }
 
