@@ -48,7 +48,7 @@ public class Main {
      BigDecimal("2000.00"), new BigDecimal("3000.00"),
      new BigDecimal("4000.00"),
      new BigDecimal("5000.00") };
-     static LocalDate[] contaData = { LocalDate.of(2016, 3, 22), LocalDate.of(2016,
+     static LocalDate[] contaData = { LocalDate.of(2027, 3, 22), LocalDate.of(2027,
      11, 22), LocalDate.of(2016, 3, 14), LocalDate.of(2016, 4, 28),
      LocalDate.of(2016,
      4, 4) };
@@ -648,6 +648,7 @@ public class Main {
         for (int i = 0; i < totalContas; i++) {
             if (contaData[i].getYear() == anoEscolhido) {
                 anoEncontrado = true;
+                break;
             } else {
                 anoEncontrado = false;
             }
@@ -683,6 +684,7 @@ public class Main {
                     }
                 }
                 debitoMes[i] = debitoMes[i].add(debitoMensalTotal);
+                maiorBenf[i] = temp1;
 
                 // Luan: Garante que não há um mês sem nenhum débito.
                 // Se houver um mês sem nada devendo, ele não imprime e pula.
@@ -690,7 +692,7 @@ public class Main {
                     System.out.println(
                             Month.of(i).getDisplayName(TextStyle.FULL, new Locale("pt", "BR")).toUpperCase()
                                     + " | R$" + debitoMes[i]
-                                    + " | " + temp1
+                                    + " | " + maiorBenf[i]
                     );
                 }
             }
