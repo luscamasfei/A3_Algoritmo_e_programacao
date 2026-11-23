@@ -25,40 +25,39 @@ public class Main {
      * • Valor do Débito (BigDecimal)
      * • Data de Vencimento (LocalDate) XXXX, XX, XX
      */
-/*
-    static int[] contaNum = new int[1000];
-    static String[] contaDesc = new String[1000];
-    static String[] contaBenef = new String[1000];
-    static BigDecimal[] contaDebit = new BigDecimal[1000];
-    static LocalDate[] contaData = new LocalDate[1000];
-    static int totalContas = 0; // Quantas contas existem
-    static boolean[] contaQuitada = new boolean[1000];
-    static BigDecimal[] contaSaldo = new BigDecimal[1000]; // Quanto falta para pagar a conta
-*/
+    /*
+     * static int[] contaNum = new int[1000];
+     * static String[] contaDesc = new String[1000];
+     * static String[] contaBenef = new String[1000];
+     * static BigDecimal[] contaDebit = new BigDecimal[1000];
+     * static LocalDate[] contaData = new LocalDate[1000];
+     * static int totalContas = 0; // Quantas contas existem
+     * static boolean[] contaQuitada = new boolean[1000];
+     * static BigDecimal[] contaSaldo = new BigDecimal[1000]; // Quanto falta para
+     * pagar a conta
+     */
     // ADAM: Para facilitar testes, fiz 5 documentos tipo placeholder. Para usar, é
     // só comentar as linhas acima e retirar o comentário destas.
 
-
-     static int[] contaNum = { 1, 2, 3, 4, 5 };
-     static String[] contaDesc = { "PLACEHOLDER1", "PLACEHOLDER2", "PLACEHOLDER3",
-     "PLACEHOLDER4", "PLACEHOLDER5" };
-     static String[] contaBenef = { "Adam Schneider", "Sadam Aschneider",
-     "Damdam Neineider", "Adam Schneider", "Sadam Aschneider" };
-     static BigDecimal[] contaDebit = { new BigDecimal("1000.00"), new
-     BigDecimal("2000.00"), new BigDecimal("3000.00"),
-     new BigDecimal("4000.00"),
-     new BigDecimal("5000.00") };
-     static LocalDate[] contaData = { LocalDate.of(2027, 3, 22), LocalDate.of(2027,
-     11, 22), LocalDate.of(2016, 3, 14), LocalDate.of(2016, 4, 28),
-     LocalDate.of(2016,
-     4, 4) };
-     static int totalContas = 5;
-     static boolean[] contaQuitada = { false, false, false, false, false };
-     static BigDecimal[] contaSaldo = new BigDecimal[1000];
-
+    static int[] contaNum = { 1, 2, 3, 4, 5 };
+    static String[] contaDesc = { "PLACEHOLDER1", "PLACEHOLDER2", "PLACEHOLDER3",
+            "PLACEHOLDER4", "PLACEHOLDER5" };
+    static String[] contaBenef = { "Adam Schneider", "Sadam Aschneider",
+            "Damdam Neineider", "Adam Schneider", "Sadam Aschneider" };
+    static BigDecimal[] contaDebit = { new BigDecimal("1000.00"), new BigDecimal("2000.00"), new BigDecimal("3000.00"),
+            new BigDecimal("4000.00"),
+            new BigDecimal("5000.00") };
+    static LocalDate[] contaData = { LocalDate.of(2027, 3, 22), LocalDate.of(2027,
+            11, 22), LocalDate.of(2016, 3, 14), LocalDate.of(2016, 4, 28),
+            LocalDate.of(2016,
+                    4, 4) };
+    static int totalContas = 5;
+    static boolean[] contaQuitada = { false, false, false, false, false };
+    static BigDecimal[] contaSaldo = new BigDecimal[1000];
 
     /**
      * Procura por um documento no vetor contaNum[].
+     * 
      * @param documento Número do documento (contaNum)
      * @return Devolve o valor da posição da conta, ou -1 se não encontrar
      */
@@ -82,13 +81,8 @@ public class Main {
         int opcao = 0;
         do {
             //
-            System.out.println("Olá mundo!");
-            System.out.println("Lucas Maffei");
-            System.out.println("Adam Schneider de Andrade");
-            System.out.println("Luan Schultz Ceretta");
-            //
-
-            System.out.println("CONTAS A PAGAR - A3 de Algoritmos e Programação.");
+            System.out.println("XYZ COMERCIO DE PRODUTOS LTDA.");
+            System.out.println("SISTEMA DE CONTAS A PAGAR");
             System.out.println("===");
             System.out.println("MENU PRINCIPAL");
             System.out.println("1 - CADASTRO DE CONTAS");
@@ -130,10 +124,12 @@ public class Main {
      * Permite também o usuário retornar ao menu principal.
      */
     static void cadastrarConta() {
-        System.out.println("==================\nCADASTRANDO CONTA... \n");
         // Lucas: Menu de cadastro já com failsafe
         int opcaoCadastro = -1;
         do {
+            System.out.println("XYZ COMERCIO DE PRODUTOS LTDA.");
+            System.out.println("SISTEMA DE CONTAS A PAGAR");
+            System.out.println("===");
             System.out.println("CADASTRO DE CONTAS");
             System.out.println("1 - INCLUSÃO");
             System.out.println("2 - ALTERAÇÃO");
@@ -181,7 +177,10 @@ public class Main {
      * e solicita uma confirmação antes de registrar.
      */
     static void incluirConta() {
-        System.out.println("=== INCLUSÃO DE CONTA ===");
+        System.out.println("XYZ COMERCIO DE PRODUTOS LTDA.");
+        System.out.println("SISTEMA DE CONTAS A PAGAR");
+        System.out.println("===");
+        System.out.println("INCLUSÃO DE CONTA\n");
 
         // Lucas: Inserir documento
         System.out.print("DOCUMENTO: ");
@@ -259,7 +258,10 @@ public class Main {
      * No final, pede uma confirmação para alterar a conta.
      */
     static void alterarConta() {
-        System.out.println("=== ALTERAÇÃO DE CONTA ===");
+        System.out.println("XYZ COMERCIO DE PRODUTOS LTDA.");
+        System.out.println("SISTEMA DE CONTAS A PAGAR");
+        System.out.println("===");
+        System.out.println("ALTERAÇÃO DE CONTA\n");
 
         // Lucas: Inserir documento
         System.out.print("DOCUMENTO: ");
@@ -346,7 +348,10 @@ public class Main {
      * e a situação atual (quitada ou em aberto).
      */
     static void consultarConta() {
-        System.out.println("=== CONSULTA DE CONTA ===");
+        System.out.println("XYZ COMERCIO DE PRODUTOS LTDA.");
+        System.out.println("SISTEMA DE CONTAS A PAGAR");
+        System.out.println("===");
+        System.out.println("CONSULTA DE CONTA\n");
 
         // Lucas: Inserir documento
         System.out.print("DOCUMENTO: ");
@@ -359,7 +364,6 @@ public class Main {
             System.out.println("Conta não encontrada");
             return;
         }
-
 
         System.out.println("DOCUMENTO: " + contaNum[i]);
         System.out.println("DESCRIÇÃO: " + contaDesc[i]);
@@ -387,9 +391,10 @@ public class Main {
      */
     static void baixarConta() {
 
-        System.out.println("==================\nBAIXANDO CONTA... \n");
-
-        System.out.println("MOVIMENTAÇÃO - BAIXA DE CONTA\n");
+        System.out.println("XYZ COMERCIO DE PRODUTOS LTDA.");
+        System.out.println("SISTEMA DE CONTAS A PAGAR");
+        System.out.println("===");
+        System.out.println("BAIXA DE CONTA\n");
         System.out.println("Digite o número do documento.\n");
         System.out.println("==================\n");
 
@@ -458,20 +463,23 @@ public class Main {
      * são exibidas no final.
      */
     static void listContasAPagar() {
-        // Luan: quaseNoVencimento é um vetor separado para não modificar tudo direto do contaData.
+        // Luan: quaseNoVencimento é um vetor separado para não modificar tudo direto do
+        // contaData.
         // Além disso, serve apenas para os que não passaram da data de vencimento.
         LocalDate[] quaseNoVencimento = new LocalDate[totalContas];
         LocalDate hoje = LocalDate.now();
         int _index = 0;
         int tempTotalContas = 0;
 
-        // Luan: outros vetores para usar no System.out para mostrar o restante dos dados.
+        // Luan: outros vetores para usar no System.out para mostrar o restante dos
+        // dados.
         int[] tempContaNum = new int[totalContas];
         String[] tempContaDesc = new String[totalContas];
         String[] tempContaBenf = new String[totalContas];
         BigDecimal[] tempContaDebit = new BigDecimal[totalContas];
 
-        // Luan: Preenche o vetor com as mesmas coisas que tem nos outros vetores, mas apenas com os que não venceram.
+        // Luan: Preenche o vetor com as mesmas coisas que tem nos outros vetores, mas
+        // apenas com os que não venceram.
         for (int i = 0; i < totalContas; i++) {
             if (contaData[i].isAfter(hoje) || contaData[i].isEqual(hoje)) {
                 quaseNoVencimento[_index] = contaData[i];
@@ -484,7 +492,8 @@ public class Main {
             }
         }
 
-        // Luan: Sort para arrumar a ordem por vencimento mais próximo da data atual do pc.
+        // Luan: Sort para arrumar a ordem por vencimento mais próximo da data atual do
+        // pc.
         for (int t = 0; t < tempTotalContas; t++) {
             LocalDate data1 = quaseNoVencimento[t];
             int _index1 = t;
@@ -530,8 +539,8 @@ public class Main {
         System.out.println(hoje.format(sdf) + "\n");
         for (int i = 0; i < tempTotalContas; i++) {
             System.out.println("VENCIMENTO: " + quaseNoVencimento[i].format(sdf) + " | VALOR: "
-            + tempContaDebit[i] + " | DOCUMENTO: " + tempContaNum[i] + " | DESCRIÇÃO: " + tempContaDesc[i]
-            + " | BENEFICIÁRIO: " + tempContaBenf[i]);
+                    + tempContaDebit[i] + " | DOCUMENTO: " + tempContaNum[i] + " | DESCRIÇÃO: " + tempContaDesc[i]
+                    + " | BENEFICIÁRIO: " + tempContaBenf[i]);
         }
 
         System.out.println("==============================\n");
@@ -559,7 +568,8 @@ public class Main {
         int _index = 0;
         int tempTotalContas = 0;
 
-        // Luan: Busca encontrar quais já estão vencidas. Ou seja, já passaram do prazo de vencimento.
+        // Luan: Busca encontrar quais já estão vencidas. Ou seja, já passaram do prazo
+        // de vencimento.
         for (int i = 0; i < totalContas; i++) {
             if (contaData[i].isBefore(hoje)) {
                 contasVencidas[_index] = contaData[i];
@@ -626,7 +636,8 @@ public class Main {
 
     /**
      * Exibe o balanço de despesas de um ano escolhido pelo usuário.
-     * Mostrando apenas os meses que possuem despesas, o valor total gasto em cada mês
+     * Mostrando apenas os meses que possuem despesas, o valor total gasto em cada
+     * mês
      * E o seu respectivo maior beneficiário.
      */
     static void balancoDespesas() {
@@ -692,8 +703,7 @@ public class Main {
                     System.out.println(
                             Month.of(i).getDisplayName(TextStyle.FULL, new Locale("pt", "BR")).toUpperCase()
                                     + " | R$" + debitoMes[i]
-                                    + " | " + maiorBenf[i]
-                    );
+                                    + " | " + maiorBenf[i]);
                 }
             }
         } else {
@@ -709,7 +719,10 @@ public class Main {
      * contas vencidas, e o valanço de despesas.
      */
     static void gerarRelatorio() {
-        System.out.println("==================\nGERANDO RELATÓRIO... \n");
+        System.out.println("XYZ COMERCIO DE PRODUTOS LTDA.");
+        System.out.println("SISTEMA DE CONTAS A PAGAR");
+        System.out.println("===");
+        System.out.println("RELATÓRIOS\n");
         int opcaoRelatorio = -1;
 
         do {
@@ -724,7 +737,6 @@ public class Main {
                 sc.nextLine();
 
                 switch (opcaoRelatorio) {
-                    // Os prints são testes.
                     case 1:
                         listContasAPagar();
                         break;
