@@ -6,6 +6,7 @@ import java.time.format.TextStyle;
 import java.util.Locale;
 import java.util.Scanner;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -313,10 +314,17 @@ public class Main {
 
         if (semPagamento == true) {
             System.out.print("VALOR: ");
-            String textoValor = sc.nextLine();
-            if (!textoValor.isEmpty()) {
-                valor = new BigDecimal(textoValor.replace(",", "."));
+            // ADAM: Failsafe para entradas inválidas
+            while (!sc.hasNextDouble()) {
+                System.out.println("Valor inválido.");
+                sc.next();
+                System.out.print("VALOR: ");
             }
+            // ADAM: Transforma o Double inserido em BigDecimal
+            Double doubleValor = sc.nextDouble();
+            valor = BigDecimal.valueOf(doubleValor).setScale(2, RoundingMode.HALF_UP);
+            sc.nextLine();
+
         } else {
             System.out.println("O valor não pode ser alterado, essa conta já foi paga!");
         }
@@ -324,7 +332,7 @@ public class Main {
         // Lucas: Inserir novo vencimento
         LocalDate vencimentoFormatado = null;
         while (vencimentoFormatado == null) {
-            System.out.print("VENCIMENTO (dd/mm/aaaa): ");
+            System.out.println("VENCIMENTO (dd/mm/aaaa): ");
             String vencimento = sc.nextLine();
             try {
                 vencimentoFormatado = LocalDate.parse(vencimento, sdf);
