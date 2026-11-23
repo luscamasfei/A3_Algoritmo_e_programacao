@@ -209,7 +209,15 @@ public class Main {
 
         // Lucas: Inserir valor
         System.out.print("VALOR: ");
-        BigDecimal valor = sc.nextBigDecimal();
+        BigDecimal valor = null;
+        while (valor == null) {
+            valor = sc.nextBigDecimal();
+            if (valor.compareTo(BigDecimal.ZERO) < 0) {
+                System.out.println("Valor inválido! Por favor insira um número positivo.");
+                System.out.print("VALOR: ");
+                valor = null;
+            }
+        }
         sc.nextLine();
 
         // ADAM: Recebe uma String e converte em LocalDate com failsafe.
