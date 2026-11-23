@@ -156,7 +156,7 @@ public class Main {
                         consultarConta();
                         break;
                     case 4:
-                        System.out.println("=== EXCLUSÃO ===");
+                        excluirConta();
                         break;
                     case 0:
                         break;
@@ -409,6 +409,59 @@ public class Main {
             System.out.println("CONTA QUITADA!");
         } else {
             System.out.println("CONTA EM ABERTO!");
+        }
+    }
+
+    static void excluirConta() {
+        System.out.println("XYZ COMERCIO DE PRODUTOS LTDA.");
+        System.out.println("SISTEMA DE CONTAS A PAGAR");
+        System.out.println("===");
+        System.out.println("EXCLUSÃO DE CONTA\n");
+        System.out.println("Digite o número do documento.\n");
+        System.out.println("==================\n");
+
+        // Recebe número do documento, com failsafe.
+        while (!sc.hasNextInt()) {
+            System.out.println("Número de documento inválido.");
+            sc.next();
+            System.out.println("Digite o número do documento.\n");
+        }
+        int documento = sc.nextInt();
+
+        if (buscarConta(documento) != -1) {
+
+            int i = buscarConta(documento);
+            String baixarcontaData = contaData[i].format(sdf);
+
+            System.out.println("Documento Encontrado!");
+            System.out.println("Número: " + contaNum[i]);
+            System.out.println("Descrição: " + contaDesc[i]);
+            System.out.println("Beneficiário: " + contaBenef[i]);
+            System.out.println("Validade: " + baixarcontaData);
+
+            if (contaQuitada[i] == true) {
+                System.out.println("Status: FECHADA/QUITADA");
+                System.out.println("==================");
+            } else {
+                System.out.println("Status: ABERTA");
+                System.out.println("==================");
+            }
+
+            System.out.println("Confirmar exclusão de conta? (S/N)");
+            sc.nextLine();
+            String resposta = sc.nextLine();
+            if (resposta.trim().equalsIgnoreCase("S")) {
+                contaNum[i] = 0;
+                contaDesc[i] = null;
+                contaBenef[i] = null;
+                contaDebit[i] = null;
+                contaSaldo[i] = null;
+                contaData[i] = null;
+                totalContas--;
+                System.out.println("Conta excluída com sucesso!");
+            } else {
+                System.out.println("Exclusão cancelada!");
+            }
         }
     }
 
