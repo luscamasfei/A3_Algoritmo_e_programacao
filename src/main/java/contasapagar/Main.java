@@ -236,14 +236,13 @@ public class Main {
         // da letra
         System.out.print("CONFIRMA INCLUSÃO (S/N)? ");
         String resposta = sc.nextLine();
-
-        if (resposta.equalsIgnoreCase("S")) {
-            contaNum[totalContas] = documento;
-            contaDesc[totalContas] = descricao;
-            contaBenef[totalContas] = beneficiario;
-            contaDebit[totalContas] = valor;
-            contaSaldo[totalContas] = valor;
-            contaData[totalContas] = vencimentoFormatado;
+        if (resposta.trim().equalsIgnoreCase(resposta)) {
+            contaNum[totalContas - 1] = documento;
+            contaDesc[totalContas - 1] = descricao;
+            contaBenef[totalContas - 1] = beneficiario;
+            contaDebit[totalContas - 1] = valor;
+            contaSaldo[totalContas - 1] = valor;
+            contaData[totalContas - 1] = vencimentoFormatado;
             // Lucas: Aumenta o contador de contas depois de guardar
             totalContas++;
             System.out.println("Conta incluída com sucesso!");
