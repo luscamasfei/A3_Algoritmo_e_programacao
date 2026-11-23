@@ -211,14 +211,20 @@ public class Main {
         String beneficiario = sc.nextLine();
 
         // Lucas: Inserir valor
-        System.out.print("VALOR: ");
         BigDecimal valor = null;
         while (valor == null) {
-            valor = sc.nextBigDecimal();
-            if (valor.compareTo(BigDecimal.ZERO) < 0) {
-                System.out.println("Valor inválido! Por favor insira um número positivo.");
+            System.out.print("VALOR: ");
+            if (sc.hasNextBigDecimal()) {
+                valor = sc.nextBigDecimal();
+                if (valor.compareTo(BigDecimal.ZERO) < 0) {
+                    System.out.println("Valor inválido! Por favor insira um número positivo.");
+                    System.out.print("VALOR: ");
+                    valor = null;
+                }
+            } else {
+                sc.next();
+                System.out.println("Valor inválido! Por favor insira um número.");
                 System.out.print("VALOR: ");
-                valor = null;
             }
         }
         sc.nextLine();
@@ -239,7 +245,7 @@ public class Main {
         // da letra
         System.out.print("CONFIRMA INCLUSÃO (S/N)? ");
         String resposta = sc.nextLine();
-        if (resposta.trim().equalsIgnoreCase(resposta)) {
+        if (resposta.trim().equalsIgnoreCase("S")) {
             contaNum[totalContas - 1] = documento;
             contaDesc[totalContas - 1] = descricao;
             contaBenef[totalContas - 1] = beneficiario;
@@ -415,6 +421,7 @@ public class Main {
      *
      * Quando o débito for pago, registra a conta como quitada no sistema.
      */
+
     static void baixarConta() {
 
         System.out.println("XYZ COMERCIO DE PRODUTOS LTDA.");
