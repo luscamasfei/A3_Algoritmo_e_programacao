@@ -603,13 +603,15 @@ public class Main {
         // apenas com os que não venceram.
         for (int i = 0; i < totalContas; i++) {
             if (contaData[i].isAfter(hoje) || contaData[i].isEqual(hoje)) {
-                quaseNoVencimento[_index] = contaData[i];
-                tempContaNum[_index] = contaNum[i];
-                tempContaDesc[_index] = contaDesc[i];
-                tempContaBenf[_index] = contaBenef[i];
-                tempContaDebit[_index] = contaDebit[i];
-                _index += 1;
-                tempTotalContas += 1;
+                if (contaQuitada[i] != true) {
+                    quaseNoVencimento[_index] = contaData[i];
+                    tempContaNum[_index] = contaNum[i];
+                    tempContaDesc[_index] = contaDesc[i];
+                    tempContaBenf[_index] = contaBenef[i];
+                    tempContaDebit[_index] = contaDebit[i];
+                    _index += 1;
+                    tempTotalContas += 1;
+                }
             }
         }
 
