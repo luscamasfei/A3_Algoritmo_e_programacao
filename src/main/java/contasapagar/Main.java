@@ -415,6 +415,16 @@ public class Main {
         }
     }
 
+    /**
+     * Pede o número do documento e busca pela conta.
+     * Caso não encontre, inválida e pede novamente.
+     *
+     * Se encontrar, mostra os dados e se a conta
+     * já foi quitada ou continua em aberta.
+     *
+     * Pergunta ao usuário pela confirmação da exclusão,
+     * e caso a resposta seja sim, a conta é excluída do sistema.
+     */
     static void excluirConta() {
         System.out.println("\nXYZ COMERCIO DE PRODUTOS LTDA.");
         System.out.println("SISTEMA DE CONTAS A PAGAR");
@@ -487,7 +497,6 @@ public class Main {
      *
      * Quando o débito for pago, registra a conta como quitada no sistema.
      */
-
     static void baixarConta() {
 
         System.out.println("\nXYZ COMERCIO DE PRODUTOS LTDA.");
