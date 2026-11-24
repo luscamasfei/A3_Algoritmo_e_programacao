@@ -662,10 +662,14 @@ public class Main {
         }
 
         // Luan: Após o sort, ele imprime tudo com todos os detalhes.
+        System.out.println("XYZ COMERCIO DE PRODUTOS LTDA.");
+        System.out.println("SISTEMA DE CONTAS A PAGAR.\n");
         System.out.println("CONTAS A PAGAR POR DATA");
-        System.out.println(hoje.format(sdf) + "\n");
+        System.out.println("DATA DE HOJE: " + hoje.format(sdf) + "\n");
         for (int i = 0; i < tempTotalContas; i++) {
-            System.out.println("VENCIMENTO: " + quaseNoVencimento[i].format(sdf) + " | VALOR: " + tempContaDebit[i] + " | DOCUMENTO: " + tempContaNum[i] + " | DESCRIÇÃO: " + tempContaDesc[i] + " | BENEFICIÁRIO: " + tempContaBenf[i]);
+            System.out.println("VENCIMENTO: " + quaseNoVencimento[i].format(sdf) + " | VALOR: " + tempContaDebit[i]
+                    + " | DOCUMENTO: " + tempContaNum[i] + " | DESCRIÇÃO: " + tempContaDesc[i]
+                    + " | BENEFICIÁRIO: " + tempContaBenf[i]);
         }
 
         System.out.println("==============================\n");
@@ -754,10 +758,14 @@ public class Main {
         }
 
         // Imprime a lista.
+        System.out.println("XYZ COMERCIO DE PRODUTOS LTDA.");
+        System.out.println("SISTEMA DE CONTAS VENCIDAS.\n");
         System.out.println("CONTAS VENCIDAS");
-        System.out.println(hoje.format(sdf) + "\n");
+        System.out.println("DATA DE HOJE: " + hoje.format(sdf) + "\n");
         for (int i = 0; i < tempTotalContas; i++) {
-            System.out.println("VENCIMENTO: " + contasVencidas[i].format(sdf) + " | VALOR: " + tempContaDebit[i] + " | DOCUMENTO: " + tempContaNum[i] + " | DESCRIÇÃO: " + tempContaDesc[i] + " | BENEFICIÁRIO: " + tempContaBenf[i]);
+            System.out.println("VENCIMENTO: " + contasVencidas[i].format(sdf) + " | VALOR: " + tempContaDebit[i]
+                    + " | DOCUMENTO: " + tempContaNum[i] + " | DESCRIÇÃO: " + tempContaDesc[i]
+                    + " | BENEFICIÁRIO: " + tempContaBenf[i]);
         }
 
         System.out.println("==============================\n");
@@ -803,6 +811,8 @@ public class Main {
                 debitoMes[i] = BigDecimal.valueOf(0);
             }
 
+            System.out.println("XYZ COMERCIO DE PRODUTOS LTDA.");
+            System.out.println("SISTEMA DE BALANÇO DE DESPESAS.\n");
             System.out.println("BALANÇO DE DESPESAS DE " + anoEscolhido);
             System.out.println("JANEIRO A DEZEMBRO");
             System.out.println("MÊS | TOTAL DE DESPESAS | MAIOR BENEFICIÁRIO\n");
