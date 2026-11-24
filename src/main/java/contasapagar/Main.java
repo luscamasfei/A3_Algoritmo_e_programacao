@@ -619,8 +619,8 @@ public class Main {
             }
         }
 
-        // Luan: Sort para arrumar a ordem por vencimento mais próximo da data atual do
-        // pc.
+        // Luan: Sort para arrumar a ordem por vencimento mais
+        // próximo da data atual do pc.
         for (int t = 0; t < tempTotalContas; t++) {
             LocalDate data1 = quaseNoVencimento[t];
             int _index1 = t;
@@ -629,6 +629,7 @@ public class Main {
             String tempBenf = tempContaBenf[t];
             BigDecimal tempDebit = tempContaDebit[t];
 
+            // Luan: A Selection Sort.
             for (int j = t + 1; j < tempTotalContas; j++) {
                 if (quaseNoVencimento[j].isBefore(data1)) {
                     data1 = quaseNoVencimento[j];
@@ -667,7 +668,7 @@ public class Main {
         System.out.println("CONTAS A PAGAR POR DATA");
         System.out.println("DATA DE HOJE: " + hoje.format(sdf) + "\n");
         for (int i = 0; i < tempTotalContas; i++) {
-            System.out.println("VENCIMENTO: " + quaseNoVencimento[i].format(sdf) + " | VALOR: " + tempContaDebit[i]
+            System.out.println("VENCIMENTO: " + quaseNoVencimento[i].format(sdf) + " | VALOR: R$" + tempContaDebit[i]
                     + " | DOCUMENTO: " + tempContaNum[i] + " | DESCRIÇÃO: " + tempContaDesc[i]
                     + " | BENEFICIÁRIO: " + tempContaBenf[i]);
         }
@@ -697,8 +698,8 @@ public class Main {
         int _index = 0;
         int tempTotalContas = 0;
 
-        // Luan: Busca encontrar quais já estão vencidas. Ou seja, já passaram do prazo
-        // de vencimento.
+        // Luan: Busca encontrar quais já estão vencidas. Ou seja,
+        // já passaram do prazo de vencimento.
         for (int i = 0; i < totalContas; i++) {
             if (contaData[i].isBefore(hoje)) {
                 // Luan: Busca por um false em contaQuitada[].
@@ -725,6 +726,7 @@ public class Main {
             String Benf1 = tempContaBenf[t];
             BigDecimal Debit1 = tempContaDebit[t];
 
+            // Luan: A Selection Sort.
             for (int i = t + 1; i < tempTotalContas; i++) {
                 if (contasVencidas[i].isBefore(data1)) {
                     data1 = contasVencidas[i];
@@ -763,7 +765,7 @@ public class Main {
         System.out.println("CONTAS VENCIDAS");
         System.out.println("DATA DE HOJE: " + hoje.format(sdf) + "\n");
         for (int i = 0; i < tempTotalContas; i++) {
-            System.out.println("VENCIMENTO: " + contasVencidas[i].format(sdf) + " | VALOR: " + tempContaDebit[i]
+            System.out.println("VENCIMENTO: " + contasVencidas[i].format(sdf) + " | VALOR: R$" + tempContaDebit[i]
                     + " | DOCUMENTO: " + tempContaNum[i] + " | DESCRIÇÃO: " + tempContaDesc[i]
                     + " | BENEFICIÁRIO: " + tempContaBenf[i]);
         }
@@ -816,16 +818,30 @@ public class Main {
             System.out.println("BALANÇO DE DESPESAS DE " + anoEscolhido);
             System.out.println("JANEIRO A DEZEMBRO");
             System.out.println("MÊS | TOTAL DE DESPESAS | MAIOR BENEFICIÁRIO\n");
+
+            // Luan: Para cada mês, ele vai:
+            // checar as contas que fazem parte do mês e ano,
+            // somar as despesas das que registram mesmo ano e mês
+            // buscar o maior beneficiador, e depois imprimir tudo.
             for (int i = 0; i < 12; i++) {
+                // Luan: debitoMensalTotal vai ser usado para
+                // encontrar o valor total de despesas em um mês.
                 BigDecimal debitoMensalTotal = BigDecimal.valueOf(0);
+                // Luan: compararDebit é usado para
+                // buscar qual o maior beneficiador.
+
+                // Temp 1 é a string em que ficara o nome
+                // salvo do maior beneficiador.
                 String temp1 = "a";
                 double compararDebit = 0;
                 int mes = i;
 
                 for (int j = 0; j < totalContas; j++) {
                     if ((contaData[j].getMonthValue()) == mes && contaData[j].getYear() == anoEscolhido) {
-                        debitoMensalTotal = debitoMensalTotal.add(contaDebit[j]);
+                        debitoMensalTotal = debitoMensalTotal.add(contaSaldo[j]);
 
+                        // Luan: Compara debitos para entender qual o
+                        // maior beneficiador.
                         double compararDebit2 = contaDebit[j].doubleValue();
                         if (compararDebit2 > compararDebit) {
                             compararDebit = compararDebit2;
