@@ -87,7 +87,7 @@ public class Main {
         int opcao = 0;
         do {
             //
-            System.out.println("XYZ COMERCIO DE PRODUTOS LTDA.");
+            System.out.println("\nXYZ COMERCIO DE PRODUTOS LTDA.");
             System.out.println("SISTEMA DE CONTAS A PAGAR");
             System.out.println("===");
             System.out.println("MENU PRINCIPAL");
@@ -133,7 +133,7 @@ public class Main {
         // Lucas: Menu de cadastro já com failsafe
         int opcaoCadastro = -1;
         do {
-            System.out.println("XYZ COMERCIO DE PRODUTOS LTDA.");
+            System.out.println("\nXYZ COMERCIO DE PRODUTOS LTDA.");
             System.out.println("SISTEMA DE CONTAS A PAGAR");
             System.out.println("===");
             System.out.println("CADASTRO DE CONTAS");
@@ -183,7 +183,7 @@ public class Main {
      * e solicita uma confirmação antes de registrar.
      */
     static void incluirConta() {
-        System.out.println("XYZ COMERCIO DE PRODUTOS LTDA.");
+        System.out.println("\nXYZ COMERCIO DE PRODUTOS LTDA.");
         System.out.println("SISTEMA DE CONTAS A PAGAR");
         System.out.println("===");
         System.out.println("INCLUSÃO DE CONTA\n");
@@ -277,7 +277,7 @@ public class Main {
      * No final, pede uma confirmação para alterar a conta.
      */
     static void alterarConta() {
-        System.out.println("XYZ COMERCIO DE PRODUTOS LTDA.");
+        System.out.println("\nXYZ COMERCIO DE PRODUTOS LTDA.");
         System.out.println("SISTEMA DE CONTAS A PAGAR");
         System.out.println("===");
         System.out.println("ALTERAÇÃO DE CONTA\n");
@@ -378,7 +378,7 @@ public class Main {
      * e a situação atual (quitada ou em aberto).
      */
     static void consultarConta() {
-        System.out.println("XYZ COMERCIO DE PRODUTOS LTDA.");
+        System.out.println("\nXYZ COMERCIO DE PRODUTOS LTDA.");
         System.out.println("SISTEMA DE CONTAS A PAGAR");
         System.out.println("===");
         System.out.println("CONSULTA DE CONTA\n");
@@ -416,7 +416,7 @@ public class Main {
     }
 
     static void excluirConta() {
-        System.out.println("XYZ COMERCIO DE PRODUTOS LTDA.");
+        System.out.println("\nXYZ COMERCIO DE PRODUTOS LTDA.");
         System.out.println("SISTEMA DE CONTAS A PAGAR");
         System.out.println("===");
         System.out.println("EXCLUSÃO DE CONTA\n");
@@ -490,18 +490,17 @@ public class Main {
 
     static void baixarConta() {
 
-        System.out.println("XYZ COMERCIO DE PRODUTOS LTDA.");
+        System.out.println("\nXYZ COMERCIO DE PRODUTOS LTDA.");
         System.out.println("SISTEMA DE CONTAS A PAGAR");
         System.out.println("===");
         System.out.println("BAIXA DE CONTA\n");
-        System.out.println("Digite o número do documento.\n");
-        System.out.println("==================\n");
+        System.out.print("Digite o número do documento: ");
 
         // Recebe número do documento, com failsafe.
         while (!sc.hasNextInt()) {
             System.out.println("Número de documento inválido.");
             sc.next();
-            System.out.println("Digite o número do documento.\n");
+            System.out.print("Digite o número do documento: ");
         }
         int documento = sc.nextInt();
 
@@ -525,39 +524,46 @@ public class Main {
                 System.out.println("Status: ABERTA");
                 System.out.println("==================");
                 System.out.println("VALOR ATUAL: " + contaDebit[i]);
-                System.out.println("\nDigite o valor a ser baixado.");
+                System.out.print("\nDigite o valor a ser baixado: ");
 
                 BigDecimal baixa_valorPago = sc.nextBigDecimal();
+                sc.nextLine();
 
                 // Não permite números negativos a serem usados em baixa.
                 if (baixa_valorPago.compareTo(BigDecimal.ZERO) < 0) {
                     System.out.println("\nValores negativos não podem ser usados. Tente novamente.");
                 } else {
-                    // Número menor que valor do débito.
-                    if ((baixa_valorPago.compareTo(contaDebit[i])) < 0) {
-                        BigDecimal baixa_valorFinal = contaDebit[i].subtract(baixa_valorPago);
-                        contaDebit[i] = baixa_valorFinal;
-                        System.out.println("\nConta baixada com sucesso.");
 
-                        // Número maior que valor do débito.
-                    } else if ((baixa_valorPago.compareTo(contaDebit[i])) > 0) {
-                        System.out.println(
-                                "\nO valor inserido foi maior do que o débito da conta. Favor inserir um valor menor ou igual ao débito.");
+                    System.out.print("CONFIRMA INCLUSÃO (S/N)? ");
+                    String resposta = sc.nextLine();
+                    if (resposta.trim().equalsIgnoreCase("S")) {
 
-                        // Número igual o valor do débito.
-                    } else if ((baixa_valorPago.compareTo(contaDebit[i])) == 0) {
-                        contaDebit[i] = contaDebit[i].subtract(baixa_valorPago);
-                        System.out.println("\nA conta de ID " + contaNum[i] + " foi quitada.\n");
-                        contaQuitada[i] = true;
+                        // Número menor que valor do débito.
+                        if ((baixa_valorPago.compareTo(contaDebit[i])) < 0) {
+                            BigDecimal baixa_valorFinal = contaDebit[i].subtract(baixa_valorPago);
+                            contaDebit[i] = baixa_valorFinal;
+                            System.out.println("\nConta baixada com sucesso.");
+
+                            // Número maior que valor do débito.
+                        } else if ((baixa_valorPago.compareTo(contaDebit[i])) > 0) {
+                            System.out.println(
+                                    "\nO valor inserido foi maior do que o débito da conta. Favor inserir um valor menor ou igual ao débito.");
+
+                            // Número igual o valor do débito.
+                        } else if ((baixa_valorPago.compareTo(contaDebit[i])) == 0) {
+                            contaDebit[i] = contaDebit[i].subtract(baixa_valorPago);
+                            System.out.println("\nA conta de ID " + contaNum[i] + " foi quitada.\n");
+                            contaQuitada[i] = true;
+                        }
+                    } else {
+                        System.out.println("Baixa cancelada!");
                     }
+
                 }
             }
-
         } else {
             System.out.println("o valor procurado não foi encontrado, tente novamente.\n");
         }
-
-        System.out.println("==================\n");
     }
 
     /**
@@ -825,7 +831,7 @@ public class Main {
      * contas vencidas, e o valanço de despesas.
      */
     static void gerarRelatorio() {
-        System.out.println("XYZ COMERCIO DE PRODUTOS LTDA.");
+        System.out.println("\nXYZ COMERCIO DE PRODUTOS LTDA.");
         System.out.println("SISTEMA DE CONTAS A PAGAR");
         System.out.println("===");
         System.out.println("RELATÓRIOS\n");
