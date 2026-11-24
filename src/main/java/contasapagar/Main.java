@@ -603,6 +603,10 @@ public class Main {
         // apenas com os que não venceram.
         for (int i = 0; i < totalContas; i++) {
             if (contaData[i].isAfter(hoje) || contaData[i].isEqual(hoje)) {
+                // Luan: Busca por um false em contaQuitada[].
+                // Se retornar true, ele não salva nenhuma das informações
+                // da conta, e continua com o for normalmente.
+                // Isso evita dele salvar uma conta com debito = 0.
                 if (contaQuitada[i] != true) {
                     quaseNoVencimento[_index] = contaData[i];
                     tempContaNum[_index] = contaNum[i];
@@ -661,9 +665,7 @@ public class Main {
         System.out.println("CONTAS A PAGAR POR DATA");
         System.out.println(hoje.format(sdf) + "\n");
         for (int i = 0; i < tempTotalContas; i++) {
-            System.out.println("VENCIMENTO: " + quaseNoVencimento[i].format(sdf) + " | VALOR: "
-                    + tempContaDebit[i] + " | DOCUMENTO: " + tempContaNum[i] + " | DESCRIÇÃO: " + tempContaDesc[i]
-                    + " | BENEFICIÁRIO: " + tempContaBenf[i]);
+            System.out.println("VENCIMENTO: " + quaseNoVencimento[i].format(sdf) + " | VALOR: " + tempContaDebit[i] + " | DOCUMENTO: " + tempContaNum[i] + " | DESCRIÇÃO: " + tempContaDesc[i] + " | BENEFICIÁRIO: " + tempContaBenf[i]);
         }
 
         System.out.println("==============================\n");
@@ -695,13 +697,19 @@ public class Main {
         // de vencimento.
         for (int i = 0; i < totalContas; i++) {
             if (contaData[i].isBefore(hoje)) {
-                contasVencidas[_index] = contaData[i];
-                tempContaNum[_index] = contaNum[i];
-                tempContaDesc[_index] = contaDesc[i];
-                tempContaBenf[_index] = contaBenef[i];
-                tempContaDebit[_index] = contaDebit[i];
-                _index += 1;
-                tempTotalContas += 1;
+                // Luan: Busca por um false em contaQuitada[].
+                // Se retornar true, ele não salva nenhuma das informações
+                // da conta, e continua com o for normalmente.
+                // Isso evita dele salvar uma conta com debito = 0.
+                if (contaQuitada[i] != true) {
+                    contasVencidas[_index] = contaData[i];
+                    tempContaNum[_index] = contaNum[i];
+                    tempContaDesc[_index] = contaDesc[i];
+                    tempContaBenf[_index] = contaBenef[i];
+                    tempContaDebit[_index] = contaDebit[i];
+                    _index += 1;
+                    tempTotalContas += 1;
+                }
             }
         }
 
@@ -749,9 +757,7 @@ public class Main {
         System.out.println("CONTAS VENCIDAS");
         System.out.println(hoje.format(sdf) + "\n");
         for (int i = 0; i < tempTotalContas; i++) {
-            System.out.println("VENCIMENTO: " + contasVencidas[i].format(sdf) + " | VALOR: "
-                    + tempContaDebit[i] + " | DOCUMENTO: " + tempContaNum[i] + " | DESCRIÇÃO: " + tempContaDesc[i]
-                    + " | BENEFICIÁRIO: " + tempContaBenf[i]);
+            System.out.println("VENCIMENTO: " + contasVencidas[i].format(sdf) + " | VALOR: " + tempContaDebit[i] + " | DOCUMENTO: " + tempContaNum[i] + " | DESCRIÇÃO: " + tempContaDesc[i] + " | BENEFICIÁRIO: " + tempContaBenf[i]);
         }
 
         System.out.println("==============================\n");
