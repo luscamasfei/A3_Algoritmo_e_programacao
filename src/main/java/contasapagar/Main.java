@@ -26,38 +26,41 @@ public class Main {
      * • Valor do Débito (BigDecimal)
      * • Data de Vencimento (LocalDate) XXXX, XX, XX
      */
-    /*
-     * static int[] contaNum = new int[1000];
-     * static String[] contaDesc = new String[1000];
-     * static String[] contaBenef = new String[1000];
-     * static BigDecimal[] contaDebit = new BigDecimal[1000];
-     * static LocalDate[] contaData = new LocalDate[1000];
-     * static int totalContas = 0; // Quantas contas existem
-     * static boolean[] contaQuitada = new boolean[1000];
-     * static BigDecimal[] contaSaldo = new BigDecimal[1000]; // Quanto falta para
-     * pagar a conta
-     */
+
+    static int[] contaNum = new int[1000];
+    static String[] contaDesc = new String[1000];
+    static String[] contaBenef = new String[1000];
+    static BigDecimal[] contaDebit = new BigDecimal[1000];
+    static LocalDate[] contaData = new LocalDate[1000];
+    static int totalContas = 0; // Quantas contas existem
+    static boolean[] contaQuitada = new boolean[1000];
+    static BigDecimal[] contaSaldo = new BigDecimal[1000]; // Quanto falta para pagar a conta
+
     // ADAM: Para facilitar testes, fiz 5 documentos tipo placeholder. Para usar, é
     // só comentar as linhas acima e retirar o comentário destas.
 
-    static int[] contaNum = { 1, 2, 3, 4, 5 };
-    static String[] contaDesc = { "PLACEHOLDER1", "PLACEHOLDER2", "PLACEHOLDER3",
-            "PLACEHOLDER4", "PLACEHOLDER5" };
-    static String[] contaBenef = { "Adam Schneider", "Sadam Aschneider",
-            "Damdam Neineider", "Adam Schneider", "Sadam Aschneider" };
-    static BigDecimal[] contaDebit = { new BigDecimal("1000.00"), new BigDecimal("2000.00"), new BigDecimal("3000.00"),
-            new BigDecimal("4000.00"),
-            new BigDecimal("5000.00") };
-    static LocalDate[] contaData = { LocalDate.of(2027, 3, 22), LocalDate.of(2027,
-            11, 22), LocalDate.of(2016, 3, 14), LocalDate.of(2016, 4, 28),
-            LocalDate.of(2016,
-                    4, 4) };
-    static int totalContas = 5;
-    static boolean[] contaQuitada = { false, false, false, false, false };
-    static BigDecimal[] contaSaldo = { new BigDecimal("1000.00"), new BigDecimal("2000.00"), new BigDecimal("3000.00"),
-            new BigDecimal("4000.00"),
-            new BigDecimal("5000.00") };
-
+    /*
+     * static int[] contaNum = { 1, 2, 3, 4, 5 };
+     * static String[] contaDesc = { "PLACEHOLDER1", "PLACEHOLDER2", "PLACEHOLDER3",
+     * "PLACEHOLDER4", "PLACEHOLDER5" };
+     * static String[] contaBenef = { "Adam Schneider", "Sadam Aschneider",
+     * "Damdam Neineider", "Adam Schneider", "Sadam Aschneider" };
+     * static BigDecimal[] contaDebit = { new BigDecimal("1000.00"), new
+     * BigDecimal("2000.00"), new BigDecimal("3000.00"),
+     * new BigDecimal("4000.00"),
+     * new BigDecimal("5000.00") };
+     * static LocalDate[] contaData = { LocalDate.of(2027, 3, 22),
+     * LocalDate.of(2027,
+     * 11, 22), LocalDate.of(2016, 3, 14), LocalDate.of(2016, 4, 28),
+     * LocalDate.of(2016,
+     * 4, 4) };
+     * static int totalContas = 5;
+     * static boolean[] contaQuitada = { false, false, false, false, false };
+     * static BigDecimal[] contaSaldo = { new BigDecimal("1000.00"), new
+     * BigDecimal("2000.00"), new BigDecimal("3000.00"),
+     * new BigDecimal("4000.00"),
+     * new BigDecimal("5000.00") };
+     */
     /**
      * Procura por um documento no vetor contaNum[].
      * 
@@ -246,12 +249,12 @@ public class Main {
         System.out.print("CONFIRMA INCLUSÃO (S/N)? ");
         String resposta = sc.nextLine();
         if (resposta.trim().equalsIgnoreCase("S")) {
-            contaNum[totalContas - 1] = documento;
-            contaDesc[totalContas - 1] = descricao;
-            contaBenef[totalContas - 1] = beneficiario;
-            contaDebit[totalContas - 1] = valor;
-            contaSaldo[totalContas - 1] = valor;
-            contaData[totalContas - 1] = vencimentoFormatado;
+            contaNum[totalContas] = documento;
+            contaDesc[totalContas] = descricao;
+            contaBenef[totalContas] = beneficiario;
+            contaDebit[totalContas] = valor;
+            contaSaldo[totalContas] = valor;
+            contaData[totalContas] = vencimentoFormatado;
             // Lucas: Aumenta o contador de contas depois de guardar
             totalContas++;
             System.out.println("Conta incluída com sucesso!");
